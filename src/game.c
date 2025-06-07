@@ -12,6 +12,15 @@ void game_initialization(rpg_t *game)
     game->window = create_window(false);
 }
 
+void game_loop(rpg_t *game)
+{
+    while (sfRenderWindow_isOpen(game->window)) {
+        game_event(game);
+        sfRenderWindow_clear(game->window, sfBlack);
+        sfRenderWindow_display(game->window);
+    }
+}
+
 void destroy_game(rpg_t *game)
 {
     sfRenderWindow_destroy(game->window);

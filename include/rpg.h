@@ -29,10 +29,11 @@ typedef struct rpg {
 } rpg_t;
 
 
+void game_event(rpg_t *game);
 
 void game_initialization(rpg_t *game);
 void destroy_game(rpg_t *game);
-
+void game_loop(rpg_t *game);
 
 sfRenderWindow *create_window(bool fullscreen);
 
