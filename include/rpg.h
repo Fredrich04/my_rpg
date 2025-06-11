@@ -8,6 +8,7 @@
 #ifndef START_H
   #define START_H
 
+    #include <SFML/OpenGL.h>
     #include <string.h>
     #include <stddef.h>
     #include <stdlib.h>
