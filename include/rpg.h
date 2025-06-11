@@ -23,21 +23,55 @@
 
     #define GAME_NAME "Cursed Legacy"
 
+typedef enum {
+    NORMAL,
+    HOVERED,
+    PRESSED,
+    RETURNING
+} button_state_t;
+
+typedef struct {
+    sfSprite *sprite;
+    sfClock *clock;
+    sfVector2f default_scale;
+    sfVector2f final_scale;
+    sfVector2f current_scale;
+    sfVector2f original_pos;
+    float duration;
+    float elapsed;
+    sfFloatRect bounds;
+    button_state_t state;
+} button_t;
 typedef struct music {
     sfMusic *music1;
 } music_t;
+
+typedef struct button_center {
+    button_t *btn_jouer;
+    button_t *btn_options;
+    button_t *btn_credits;
+    button_t *btn_quitter;
+} button_center_t;
 
 typedef struct rpg {
     sfRenderWindow *window;
     sfEvent event;
     sfTexture *texture1;
     sfSprite *sprite1;
-    sfVector2i pos_par;
+    sfVector2i mouse_pos;
     sfTexture *texture2;
     sfSprite *sprite2;
     int m;
+    button_center_t *btn;
     music_t *music;
 } rpg_t;
+
+
+button_t *create_button(sfTexture *texture, sfVector2f pos, sfVector2f scale);
+void update_button(button_t *btn, sfRenderWindow *window);
+void draw_all_button(rpg_t *game);
+void handle_button_event(button_t *btn, rpg_t *game);
+void destroy_all_button(rpg_t *game);
 
 void game_event(rpg_t *game);
 void game_initialization(rpg_t *game);

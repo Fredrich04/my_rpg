@@ -21,11 +21,13 @@ void game_event(rpg_t *game)
 {
     while (sfRenderWindow_pollEvent(game->window, &game->event)) {
         close_event(game);
+        handle_button_event(game->btn->btn_jouer, game);
+        handle_button_event(game->btn->btn_options, game);
+        handle_button_event(game->btn->btn_credits, game);
+        handle_button_event(game->btn->btn_quitter, game);
         if (game->event.type == sfEvtMouseButtonPressed) {
-            if (game->pos_par.x >= 330 && game->pos_par.x <= 750 &&
-                game->pos_par.y >= 880 && game->pos_par.y <= 1000) {
+            if (sfFloatRect_contains(&game->btn->btn_options->bounds, game->mouse_pos.x, game->mouse_pos.y))
                 game->m = 1;
-            }
         }
     }
 }
@@ -37,16 +39,14 @@ void menu_s(rpg_t *game)
     sfSprite_setTexture(game->sprite2, game->texture2, sfTrue);
     sfSprite_setPosition(game->sprite2, (sfVector2f){-1, -1});
     sfSprite_setScale (game->sprite2, (sfVector2f){0.98, 0.974});
-    game->pos_par = sfMouse_getPositionRenderWindow(game->window);
+    game->mouse_pos = sfMouse_getPositionRenderWindow(game->window);
     while (game->m == 1) {
         while (sfRenderWindow_pollEvent(game->window, &game->event)) {
             close_event(game);
-            game->pos_par = sfMouse_getPositionRenderWindow(game->window);
-            printf("%d\n" "%d\n" , game->pos_par.x, game->pos_par.y);
+            game->mouse_pos = sfMouse_getPositionRenderWindow(game->window);
             if (game->event.type == sfEvtMouseButtonPressed) {
-                
-                if (game->pos_par.x >= 90 && game->pos_par.x <= 370 &&
-                    game->pos_par.y >= 920 && game->pos_par.y <= 1000) {
+                if (game->mouse_pos.x >= 90 && game->mouse_pos.x <= 370 &&
+                    game->mouse_pos.y >= 920 && game->mouse_pos.y <= 1000) {
                     game->m = 0;
                 }
             }
@@ -61,18 +61,22 @@ void menu_s(rpg_t *game)
 
 void game_loop(rpg_t *game)
 {
-    game->m = 0;
     handle_music(game->music->music1);
     game->sprite1 = sfSprite_create();
-    game->texture1 = sfTexture_createFromFile("assert/menu_p.png", NULL);
+    game->texture1 = sfTexture_createFromFile("assert/front.png", NULL);
     sfSprite_setTexture(game->sprite1, game->texture1, sfTrue);
     sfSprite_setPosition(game->sprite1, (sfVector2f){0, 0});
     while (sfRenderWindow_isOpen(game->window)) {
         game_event(game);
+        update_button(game->btn->btn_jouer, game->window);
+        update_button(game->btn->btn_options, game->window);
+        update_button(game->btn->btn_credits, game->window);
+        update_button(game->btn->btn_quitter, game->window);
         sfRenderWindow_clear(game->window, sfBlack);
         menu_s(game);
         if (game->m == 0)
             sfRenderWindow_drawSprite(game->window, game->sprite1, NULL);
+        draw_all_button(game);
         sfRenderWindow_display(game->window);
     }
     sfMusic_stop(game->music->music1);

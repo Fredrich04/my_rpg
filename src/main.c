@@ -13,6 +13,5 @@ int main(void)
 
     game_initialization(game);
     game_loop(game);
-    //    destroy_game(game);
     return 0;
 }
