@@ -30,7 +30,7 @@ typedef struct powers {
     bool active_state;
     char *comment;
     char *name;
-    sfText *comm;
+    sfText *comment_text;
     sfTexture *weapon_texture;
     sfSprite *weapon_sprite;
     sfSprite *inventory_sprite;
