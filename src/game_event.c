@@ -35,18 +35,19 @@ void game_event(rpg_t *game)
 void menu_s(rpg_t *game)
 {
     game->sprite2 = sfSprite_create();
-    game->texture2 = sfTexture_createFromFile("assert/menu_s.png", NULL);
+    game->texture2 = sfTexture_createFromFile("assert/menu_s1.png", NULL);
     sfSprite_setTexture(game->sprite2, game->texture2, sfTrue);
     sfSprite_setPosition(game->sprite2, (sfVector2f){-1, -1});
-    sfSprite_setScale (game->sprite2, (sfVector2f){0.98, 0.974});
+    sfSprite_setScale (game->sprite2, (sfVector2f){0.98, 0.934});
     game->mouse_pos = sfMouse_getPositionRenderWindow(game->window);
     while (game->m == 1) {
         while (sfRenderWindow_pollEvent(game->window, &game->event)) {
             close_event(game);
             game->mouse_pos = sfMouse_getPositionRenderWindow(game->window);
+            printf("%d\n %d\n", game->mouse_pos.x, game->mouse_pos.y);
             if (game->event.type == sfEvtMouseButtonPressed) {
-                if (game->mouse_pos.x >= 90 && game->mouse_pos.x <= 370 &&
-                    game->mouse_pos.y >= 920 && game->mouse_pos.y <= 1000) {
+                if (game->mouse_pos.x >= 85 && game->mouse_pos.x <= 400 &&
+                    game->mouse_pos.y >= 870 && game->mouse_pos.y <= 952) {
                     game->m = 0;
                 }
             }

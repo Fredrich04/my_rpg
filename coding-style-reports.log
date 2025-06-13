@@ -1,0 +1,8 @@
+./src/game_event.c:29: MAJOR:C-C1
+./src/game_event.c:29: MAJOR:C-F3
+./src/game_event.c:41: MINOR:C-L3
+./src/game_event.c:47: MAJOR:C-C1
+./src/game_event.c:48: MAJOR:C-C1
+./src/game_event.c:57: MAJOR:C-F4
+./src/game_event.c:58: MAJOR:C-F4
+./src/game_event.c:59: MAJOR:C-F4
