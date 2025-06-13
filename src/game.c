@@ -26,6 +26,9 @@ void game_initialization(rpg_t *game)
     game->btn->btn_quitter = create_button(sfTexture_createFromFile(
         "assert/btn_quitter.png", NULL), (sfVector2f){1300, 860},
         (sfVector2f){1.0f, 1.0f});
+    game->btn->btn_volume_up = create_button(sfTexture_createFromFile(
+	"assert/volume_up.png", NULL), (sfVector2f){380, 250},
+	(sfVector2f){0.85f, 0.85f});
 }
 
 void destroy_game(rpg_t *game)

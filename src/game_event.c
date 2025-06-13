@@ -43,6 +43,7 @@ void menu_s(rpg_t *game)
     while (game->m == 1) {
         while (sfRenderWindow_pollEvent(game->window, &game->event)) {
             close_event(game);
+            handle_button_event_s(game->btn->btn_volume_up, game);
             game->mouse_pos = sfMouse_getPositionRenderWindow(game->window);
             printf("%d\n %d\n", game->mouse_pos.x, game->mouse_pos.y);
             if (game->event.type == sfEvtMouseButtonPressed) {
@@ -52,8 +53,10 @@ void menu_s(rpg_t *game)
                 }
             }
         }
+        update_button(game->btn->btn_volume_up, game->window);
         sfRenderWindow_clear(game->window, sfBlack);
         sfRenderWindow_drawSprite(game->window, game->sprite2, NULL);
+        draw_all_button_s(game);
         sfRenderWindow_display(game->window);
     }
     sfSprite_destroy(game->sprite2);

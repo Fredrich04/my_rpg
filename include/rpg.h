@@ -51,6 +51,12 @@ typedef struct button_center {
     button_t *btn_options;
     button_t *btn_credits;
     button_t *btn_quitter;
+    button_t *btn_volume_up;
+    button_t *btn_volume_d;
+    button_t *btn_commande;
+    button_t *btn_retour;
+    button_t *btn_e_size;
+    button_t *btn_muet;
 } button_center_t;
 
 typedef struct rpg {
@@ -67,6 +73,8 @@ typedef struct rpg {
 } rpg_t;
 
 
+void handle_button_event_s(button_t *btn, rpg_t *game);
+void draw_all_button_s(rpg_t *game);
 button_t *create_button(sfTexture *texture, sfVector2f pos, sfVector2f scale);
 void update_button(button_t *btn, sfRenderWindow *window);
 void draw_all_button(rpg_t *game);

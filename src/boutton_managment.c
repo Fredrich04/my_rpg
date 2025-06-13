@@ -127,6 +127,11 @@ void draw_all_button(rpg_t *game)
     draw_button(game->btn->btn_quitter, game->window);
 }
 
+void draw_all_button_s(rpg_t *game)
+{
+   draw_button(game->btn->btn_volume_up, game->window);
+}
+
 void destroy_all_button(rpg_t *game)
 {
     destroy_button(game->btn->btn_jouer);
