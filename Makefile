@@ -32,6 +32,7 @@ clean:
 
 fclean:	clean
 	$(RM) $(NAME)
+	rm -f coding-style-reports.log 
 
 re:	fclean all
 
