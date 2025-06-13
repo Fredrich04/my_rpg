@@ -58,3 +58,13 @@ void handle_button_event_s(button_t *btn, rpg_t *game)
     pressed_and_hovered_detection_s(btn, game, is_hovered);
     pressed_and_hovered_action_s(btn, game, is_hovered);
 }
+
+void draw_all_button_s(rpg_t *game)
+{
+   draw_button(game->btn->btn_volume_up, game->window);
+   draw_button(game->btn->btn_volume_d, game->window);
+   draw_button(game->btn->btn_commande, game->window);
+   draw_button(game->btn->btn_e_size, game->window);
+   draw_button(game->btn->btn_muet, game->window);
+   draw_button(game->btn->btn_retour, game->window);
+}

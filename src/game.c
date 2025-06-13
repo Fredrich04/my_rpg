@@ -29,6 +29,21 @@ void game_initialization(rpg_t *game)
     game->btn->btn_volume_up = create_button(sfTexture_createFromFile(
 	"assert/volume_up.png", NULL), (sfVector2f){380, 250},
 	(sfVector2f){0.85f, 0.85f});
+    game->btn->btn_volume_d = create_button(sfTexture_createFromFile(
+	"assert/volume_down.png", NULL), (sfVector2f){1100, 250},
+	(sfVector2f){0.85f, 0.85f});
+     game->btn->btn_commande = create_button(sfTexture_createFromFile(
+	"assert/commande.png", NULL), (sfVector2f){380, 500},
+	(sfVector2f){0.85f, 0.85f});
+     game->btn->btn_e_size = create_button(sfTexture_createFromFile(
+	"assert/s_r.png", NULL), (sfVector2f){800, 730},
+	(sfVector2f){0.85f, 0.85f});
+     game->btn->btn_muet = create_button(sfTexture_createFromFile(
+	"assert/muet.png", NULL), (sfVector2f){1100, 500},
+	(sfVector2f){0.85f, 0.85f});
+      game->btn->btn_retour = create_button(sfTexture_createFromFile(
+	"assert/retour.png", NULL), (sfVector2f){300, 900},
+	(sfVector2f){0.75f, 0.75f});
 }
 
 void destroy_game(rpg_t *game)

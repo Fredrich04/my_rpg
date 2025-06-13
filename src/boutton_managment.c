@@ -107,7 +107,7 @@ void handle_button_event(button_t *btn, rpg_t *game)
     pressed_and_hovered_action(btn, game, is_hovered);
 }
 
-static void draw_button(button_t *btn, sfRenderWindow *window)
+void draw_button(button_t *btn, sfRenderWindow *window)
 {
     sfRenderWindow_drawSprite(window, btn->sprite, NULL);
 }
@@ -125,11 +125,6 @@ void draw_all_button(rpg_t *game)
     draw_button(game->btn->btn_options, game->window);
     draw_button(game->btn->btn_credits, game->window);
     draw_button(game->btn->btn_quitter, game->window);
-}
-
-void draw_all_button_s(rpg_t *game)
-{
-   draw_button(game->btn->btn_volume_up, game->window);
 }
 
 void destroy_all_button(rpg_t *game)

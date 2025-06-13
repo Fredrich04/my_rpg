@@ -72,7 +72,7 @@ typedef struct rpg {
     music_t *music;
 } rpg_t;
 
-
+void draw_button(button_t *btn, sfRenderWindow *window);
 void handle_button_event_s(button_t *btn, rpg_t *game);
 void draw_all_button_s(rpg_t *game);
 button_t *create_button(sfTexture *texture, sfVector2f pos, sfVector2f scale);
