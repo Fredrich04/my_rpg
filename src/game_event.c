@@ -7,14 +7,31 @@
 
 #include "../include/rpg.h"
 
+void set_close(rpg_t *game)
+{
+    if (game->main_menu->is_close)
+        game->is_close = 1;
+}
+
 void close_event(rpg_t *game)
 {
+    set_close(game);
     if (game->event.type == sfEvtClosed
-        || game->event.key.code == sfKeyEscape) {
+        || game->event.key.code == sfKeyEscape || game->is_close) {
         sfRenderWindow_close(game->window);
         destroy_game(game);
         exit(0);
     }
+}
+
+void main_menu_button_press_event(rpg_t *game)
+{
+    if (sfFloatRect_contains(&game->btn->btn_options->bounds,
+        game->mouse_pos.x, game->mouse_pos.y))
+        game->main_menu->m = 1;
+    if (sfFloatRect_contains(&game->btn->btn_quitter->bounds,
+        game->mouse_pos.x, game->mouse_pos.y))
+        game->main_menu->is_close = 1;
 }
 
 void game_event(rpg_t *game)
@@ -25,11 +42,48 @@ void game_event(rpg_t *game)
         handle_button_event(game->btn->btn_options, game);
         handle_button_event(game->btn->btn_credits, game);
         handle_button_event(game->btn->btn_quitter, game);
-        if (game->event.type == sfEvtMouseButtonPressed) {
-            if (sfFloatRect_contains(&game->btn->btn_options->bounds, game->mouse_pos.x, game->mouse_pos.y))
-                game->m = 1;
-        }
+        if (game->event.type == sfEvtMouseButtonPressed)
+            main_menu_button_press_event(game);
     }
+}
+
+void menu_s_button_event(rpg_t *game)
+{
+    game->mouse_pos = sfMouse_getPositionRenderWindow(game->window);
+    handle_button_event_s(game->btn->btn_retour, game);
+    handle_button_event_s(game->btn->btn_muet, game);
+    handle_button_event_s(game->btn->btn_e_size, game);
+    handle_button_event_s(game->btn->btn_commande, game);
+    handle_button_event_s(game->btn->btn_volume_d, game);
+    handle_button_event_s(game->btn->btn_volume_up, game);
+    printf("%d\n %d\n", game->mouse_pos.x, game->mouse_pos.y);
+}
+
+void menu_s_button_press_event(rpg_t *game)
+{
+    if (sfFloatRect_contains(&game->btn->btn_retour->bounds,
+        game->mouse_pos.x, game->mouse_pos.y))
+        game->main_menu->m = 0;
+}
+
+void menu_s_event(rpg_t *game)
+{
+    while (sfRenderWindow_pollEvent(game->window, &game->event)) {
+        close_event(game);
+        menu_s_button_event(game);
+        if (game->event.type == sfEvtMouseButtonPressed)
+            menu_s_button_press_event(game);
+    }
+}
+
+void update_menu_s_button(rpg_t *game)
+{
+    update_button(game->btn->btn_retour, game->window);
+    update_button(game->btn->btn_muet, game->window);
+    update_button(game->btn->btn_e_size, game->window);
+    update_button(game->btn->btn_commande, game->window);
+    update_button(game->btn->btn_volume_d, game->window);
+    update_button(game->btn->btn_volume_up, game->window);
 }
 
 void menu_s(rpg_t *game)
@@ -38,32 +92,11 @@ void menu_s(rpg_t *game)
     game->texture2 = sfTexture_createFromFile("assert/menu_s1.png", NULL);
     sfSprite_setTexture(game->sprite2, game->texture2, sfTrue);
     sfSprite_setPosition(game->sprite2, (sfVector2f){-1, -1});
-    sfSprite_setScale (game->sprite2, (sfVector2f){0.98, 0.934});
+    sfSprite_setScale(game->sprite2, (sfVector2f){0.98, 0.934});
     game->mouse_pos = sfMouse_getPositionRenderWindow(game->window);
-    while (game->m == 1) {
-        while (sfRenderWindow_pollEvent(game->window, &game->event)) {
-            close_event(game);
-            game->mouse_pos = sfMouse_getPositionRenderWindow(game->window);
-            handle_button_event_s(game->btn->btn_retour, game);
-            handle_button_event_s(game->btn->btn_muet, game);
-            handle_button_event_s(game->btn->btn_e_size, game);
-            handle_button_event_s(game->btn->btn_commande, game);
-            handle_button_event_s(game->btn->btn_volume_d, game);
-            handle_button_event_s(game->btn->btn_volume_up, game);
-            //game->mouse_pos = sfMouse_getPositionRenderWindow(game->window);
-            printf("%d\n %d\n", game->mouse_pos.x, game->mouse_pos.y);
-            if (game->event.type == sfEvtMouseButtonPressed) {
-                if (sfFloatRect_contains(&game->btn->btn_retour->bounds, game->mouse_pos.x, game->mouse_pos.y)) {
-                    game->m = 0;
-                }
-            }
-        }
-        update_button(game->btn->btn_retour, game->window);
-        update_button(game->btn->btn_muet, game->window);
-        update_button(game->btn->btn_e_size, game->window);
-        update_button(game->btn->btn_commande, game->window);
-        update_button(game->btn->btn_volume_d, game->window);
-        update_button(game->btn->btn_volume_up, game->window);
+    while (game->main_menu->m == 1) {
+        menu_s_event(game);
+        update_menu_s_button(game);
         sfRenderWindow_clear(game->window, sfBlack);
         sfRenderWindow_drawSprite(game->window, game->sprite2, NULL);
         draw_all_button_s(game);
@@ -88,7 +121,7 @@ void game_loop(rpg_t *game)
         update_button(game->btn->btn_quitter, game->window);
         sfRenderWindow_clear(game->window, sfBlack);
         menu_s(game);
-        if (game->m == 0)
+        if (game->main_menu->m == 0)
             sfRenderWindow_drawSprite(game->window, game->sprite1, NULL);
         draw_all_button(game);
         sfRenderWindow_display(game->window);

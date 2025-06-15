@@ -112,7 +112,7 @@ void draw_button(button_t *btn, sfRenderWindow *window)
     sfRenderWindow_drawSprite(window, btn->sprite, NULL);
 }
 
-static void destroy_button(button_t *btn)
+void destroy_button(button_t *btn)
 {
     sfSprite_destroy(btn->sprite);
     sfClock_destroy(btn->clock);
@@ -125,13 +125,4 @@ void draw_all_button(rpg_t *game)
     draw_button(game->btn->btn_options, game->window);
     draw_button(game->btn->btn_credits, game->window);
     draw_button(game->btn->btn_quitter, game->window);
-}
-
-void destroy_all_button(rpg_t *game)
-{
-    destroy_button(game->btn->btn_jouer);
-    destroy_button(game->btn->btn_options);
-    destroy_button(game->btn->btn_credits);
-    destroy_button(game->btn->btn_quitter);
-    free(game->btn);
 }

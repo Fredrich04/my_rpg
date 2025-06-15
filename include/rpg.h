@@ -59,6 +59,11 @@ typedef struct button_center {
     button_t *btn_muet;
 } button_center_t;
 
+typedef struct main_menu {
+    int is_close;
+    int m;
+} main_menu_t;
+
 typedef struct rpg {
     sfRenderWindow *window;
     sfEvent event;
@@ -67,11 +72,13 @@ typedef struct rpg {
     sfVector2i mouse_pos;
     sfTexture *texture2;
     sfSprite *sprite2;
-    int m;
+    main_menu_t *main_menu;
+    int is_close;
     button_center_t *btn;
     music_t *music;
 } rpg_t;
 
+void destroy_button(button_t *btn);
 void draw_button(button_t *btn, sfRenderWindow *window);
 void handle_button_event_s(button_t *btn, rpg_t *game);
 void draw_all_button_s(rpg_t *game);
