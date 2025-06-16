@@ -83,8 +83,12 @@ typedef struct rpg {
     int is_close;
     button_center_t *btn;
     music_t *music;
+    sfSprite *sprite_c;
+    sfTexture *texture_c;
 } rpg_t;
 
+void menu_c_event(rpg_t *game);
+void credits(rpg_t *game);
 void button_resize(rpg_t *game, button_t *btn);
 void destroy_button(button_t *btn);
 void draw_button(button_t *btn, sfRenderWindow *window);

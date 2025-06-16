@@ -62,6 +62,9 @@ void game_initialization(rpg_t *game)
     game->music->sound_btn = sfSound_create();
     game->music->sound_btn_buf = sfSoundBuffer_createFromFile("assert/menu_sounds.wav");
     sfSound_setBuffer(game->music->sound_btn, game->music->sound_btn_buf);
+    game->sprite_c = sfSprite_create();
+    game->texture_c = sfTexture_createFromFile("assert/credits.jpeg", NULL);
+    sfSprite_setTexture(game->sprite_c, game->texture_c, sfTrue);
 }
 
 void destroy_all_button(rpg_t *game)
@@ -82,9 +85,13 @@ void destroy_game(rpg_t *game)
 {
     sfSprite_destroy(game->sprite1);
     sfTexture_destroy(game->texture1);
+    sfSprite_destroy(game->sprite_c);
+    sfTexture_destroy(game->texture_c);
     destroy_all_button(game);
     sfRenderWindow_destroy(game->window);
     sfMusic_destroy(game->music->music1);
+    sfSound_destroy(game->music->sound_btn);
+    sfSoundBuffer_destroy(game->music->sound_btn_buf);
     free(game->music);
     free(game);
 }
