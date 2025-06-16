@@ -22,6 +22,8 @@
     #include <time.h>
 
     #define GAME_NAME "Cursed Legacy"
+    #define SCREEN_WIDTH 1920
+    #define SCREEN_HEIGHT 1080
 
 typedef enum {
     NORMAL,
@@ -41,11 +43,14 @@ typedef struct {
     float elapsed;
     sfFloatRect bounds;
     button_state_t state;
+    sfVector2f echelle;
 } button_t;
 typedef struct music {
     sfMusic *music1;
     float volume;
     int m_bool;
+    sfSound *sound_btn;
+    sfSoundBuffer *sound_btn_buf;
 } music_t;
 
 typedef struct button_center {
@@ -80,6 +85,7 @@ typedef struct rpg {
     music_t *music;
 } rpg_t;
 
+void button_resize(rpg_t *game, button_t *btn);
 void destroy_button(button_t *btn);
 void draw_button(button_t *btn, sfRenderWindow *window);
 void handle_button_event_s(button_t *btn, rpg_t *game);

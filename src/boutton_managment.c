@@ -33,7 +33,19 @@ button_t *create_button(sfTexture *texture, sfVector2f pos, sfVector2f scale)
     btn->elapsed = 0.0f;
     btn->state = NORMAL;
     btn->bounds = (sfFloatRect){0};
+    btn->echelle = (sfVector2f){(float)pos.x / SCREEN_WIDTH, (float)pos.y / SCREEN_HEIGHT}; 
     return btn;
+}
+
+void button_resize(rpg_t *game, button_t *btn)
+{
+    sfVector2u w_size = sfRenderWindow_getSize(game->window);
+    sfVector2f new_scale = {(float) btn->echelle.x / w_size.x, (float) btn->echelle.y / w_size.y};
+    float took_scale = fminf(new_scale.x, new_scale.y);
+    sfVector2f new_position = {(float) btn->echelle.x * w_size.x, (float) btn->echelle.y * w_size.y};
+    sfVector2f scale = {btn->current_scale.x * took_scale, btn->current_scale.y * took_scale};
+    sfSprite_setPosition (btn->sprite, new_position);
+    sfSprite_setScale (btn->sprite, scale);
 }
 
 void update_button(button_t *btn, sfRenderWindow *window)

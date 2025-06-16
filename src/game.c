@@ -59,6 +59,9 @@ void game_initialization(rpg_t *game)
     init_button(game);
     game->music->m_bool = 0;
     game->mouse_pos = (sfVector2i){0, 0};
+    game->music->sound_btn = sfSound_create();
+    game->music->sound_btn_buf = sfSoundBuffer_createFromFile("assert/menu_sounds.wav");
+    sfSound_setBuffer(game->music->sound_btn, game->music->sound_btn_buf);
 }
 
 void destroy_all_button(rpg_t *game)

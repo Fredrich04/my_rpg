@@ -1,4 +1,4 @@
-/*
+/**
 ** EPITECH PROJECT, 2025
 ** main file
 ** File description:
@@ -42,8 +42,12 @@ void game_event(rpg_t *game)
         handle_button_event(game->btn->btn_options, game);
         handle_button_event(game->btn->btn_credits, game);
         handle_button_event(game->btn->btn_quitter, game);
-        if (game->event.type == sfEvtMouseButtonPressed)
+        if (game->event.type == sfEvtMouseButtonPressed) {
+            sfSound_play(game->music->sound_btn);
             main_menu_button_press_event(game);
+        }
+        // if (game->event.type == sfEvtResized)
+        //  button_resize(game, game->btn->btn_jouer);
     }
 }
 
@@ -98,8 +102,12 @@ void menu_s_event(rpg_t *game)
     while (sfRenderWindow_pollEvent(game->window, &game->event)) {
         close_event(game);
         menu_s_button_event(game);
-        if (game->event.type == sfEvtMouseButtonPressed)
+        if (game->event.type == sfEvtMouseButtonPressed) {
+            sfSound_play(game->music->sound_btn);
             menu_s_button_press_event(game);
+        }
+        // if (game->event.type == sfEvtResized)
+            //  button_resize(game, btn);
     }
 }
 

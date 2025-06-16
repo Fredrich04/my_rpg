@@ -53,7 +53,7 @@ void handle_button_event_s(button_t *btn, rpg_t *game)
 {
     sfBool is_hovered = sfFloatRect_contains(&btn->bounds, game->mouse_pos.x,
         game->mouse_pos.y);
-
+    
     btn->bounds = sfSprite_getGlobalBounds(btn->sprite);
     pressed_and_hovered_detection_s(btn, game, is_hovered);
     pressed_and_hovered_action_s(btn, game, is_hovered);
