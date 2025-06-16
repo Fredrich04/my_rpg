@@ -10,9 +10,9 @@
 static void pressed_and_hovered_detection_s(button_t *btn, rpg_t *game,
     sfBool is_hovered)
 {
-    if (is_hovered && btn->state != PRESSED && btn->final_scale.x != 0.9f) {
+    if (is_hovered && btn->state != PRESSED && btn->final_scale.x != 0.88f) {
         btn->current_scale = btn->current_scale;
-        btn->final_scale = (sfVector2f){0.9f, 0.9f};
+        btn->final_scale = (sfVector2f){0.88f, 0.88f};
         btn->duration = 0.2f;
         btn->elapsed = 0.0f;
         btn->state = HOVERED;

@@ -57,6 +57,8 @@ void game_initialization(rpg_t *game)
     game->is_close = 0;
     game->music->music1 = sfMusic_createFromFile("assert/music_epic.mp3");
     init_button(game);
+    game->music->m_bool = 0;
+    game->mouse_pos = (sfVector2i){0, 0};
 }
 
 void destroy_all_button(rpg_t *game)

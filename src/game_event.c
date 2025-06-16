@@ -64,6 +64,33 @@ void menu_s_button_press_event(rpg_t *game)
     if (sfFloatRect_contains(&game->btn->btn_retour->bounds,
         game->mouse_pos.x, game->mouse_pos.y))
         game->main_menu->m = 0;
+     if (sfFloatRect_contains(&game->btn->btn_volume_up->bounds,
+         game->mouse_pos.x, game->mouse_pos.y)) {
+         game->music->volume = sfMusic_getVolume(game->music->music1);
+         if (game->music->volume + 5 > 100)
+             game->music->volume = 100;
+         else
+             game->music->volume += 5;
+     sfMusic_setVolume(game->music->music1, game->music->volume);
+     }
+      if (sfFloatRect_contains(&game->btn->btn_volume_d->bounds,
+	 game->mouse_pos.x, game->mouse_pos.y)) {
+         game->music->volume = sfMusic_getVolume(game->music->music1);
+          if (game->music->volume - 5 < 0)
+             game->music->volume = 0;
+         else
+             game->music->volume -= 5;
+     sfMusic_setVolume(game->music->music1, game->music->volume - 5);
+     }
+      if (sfFloatRect_contains(&game->btn->btn_muet->bounds,
+         game->mouse_pos.x, game->mouse_pos.y) && game->music->m_bool == 0) {
+          sfMusic_pause (game->music->music1);
+          game->music->m_bool = 1;
+      } else if (sfFloatRect_contains(&game->btn->btn_muet->bounds,
+         game->mouse_pos.x, game->mouse_pos.y) && game->music->m_bool == 1) {
+          sfMusic_play(game->music->music1);
+          game->music->m_bool = 0;
+      }
 }
 
 void menu_s_event(rpg_t *game)

@@ -44,6 +44,8 @@ typedef struct {
 } button_t;
 typedef struct music {
     sfMusic *music1;
+    float volume;
+    int m_bool;
 } music_t;
 
 typedef struct button_center {
