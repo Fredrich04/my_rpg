@@ -42,6 +42,7 @@ typedef struct {
     sfFloatRect bounds;
     button_state_t state;
 } button_t;
+
 typedef struct music {
     sfMusic *music1;
 } music_t;
