@@ -43,7 +43,14 @@ void init_button(rpg_t *game)
     game->btn->btn_volume_up = create_button(sfTexture_createFromFile(
         "assert/volume_up.png", NULL), (sfVector2f){380, 250},
         (sfVector2f){0.85f, 0.85f});
+     game->btn->btn_back_screen = create_button(sfTexture_createFromFile(
+        "assert/back_screen.png", NULL), (sfVector2f){140, 140},
+        (sfVector2f){0.85f, 0.85f});
+     game->btn->btn_back_credit = create_button(sfTexture_createFromFile(
+        "assert/back_credit.png", NULL), (sfVector2f){140, 900},
+        (sfVector2f){0.85f, 0.85f});
     init_button_part2(game);
+    
 }
 
 void game_initialization(rpg_t *game)
@@ -65,6 +72,9 @@ void game_initialization(rpg_t *game)
     game->sprite_c = sfSprite_create();
     game->texture_c = sfTexture_createFromFile("assert/credits.jpeg", NULL);
     sfSprite_setTexture(game->sprite_c, game->texture_c, sfTrue);
+    game->sprite_e = sfSprite_create();
+    game->texture_e = sfTexture_createFromFile("assert/screen.png", NULL);
+    sfSprite_setTexture(game->sprite_e, game->texture_e, sfTrue);
 }
 
 void destroy_all_button(rpg_t *game)
@@ -78,6 +88,8 @@ void destroy_all_button(rpg_t *game)
     destroy_button(game->btn->btn_retour);
     destroy_button(game->btn->btn_volume_d);
     destroy_button(game->btn->btn_volume_up);
+    destroy_button(game->btn->btn_back_screen);
+    destroy_button(game->btn->btn_back_credit);
     free(game->btn);
 }
 
@@ -87,6 +99,8 @@ void destroy_game(rpg_t *game)
     sfTexture_destroy(game->texture1);
     sfSprite_destroy(game->sprite_c);
     sfTexture_destroy(game->texture_c);
+    sfSprite_destroy(game->sprite_e);
+    sfTexture_destroy(game->texture_e);
     destroy_all_button(game);
     sfRenderWindow_destroy(game->window);
     sfMusic_destroy(game->music->music1);

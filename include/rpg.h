@@ -45,6 +45,7 @@ typedef struct {
     button_state_t state;
     sfVector2f echelle;
 } button_t;
+
 typedef struct music {
     sfMusic *music1;
     float volume;
@@ -64,6 +65,8 @@ typedef struct button_center {
     button_t *btn_retour;
     button_t *btn_e_size;
     button_t *btn_muet;
+    button_t *btn_back_screen;
+    button_t *btn_back_credit;
 } button_center_t;
 
 typedef struct main_menu {
@@ -85,8 +88,25 @@ typedef struct rpg {
     music_t *music;
     sfSprite *sprite_c;
     sfTexture *texture_c;
+    sfSprite *sprite_e;
+    sfTexture *texture_e;
+
 } rpg_t;
 
+void handle_button_event_credit(button_t *btn, rpg_t *game);
+void draw_button_credit(rpg_t *game);
+void menu_credit_button_press_event(rpg_t *game);
+void menu_credit_button_event(rpg_t *game);
+void menu_credit_event(rpg_t *game);
+void menu_credit_button(rpg_t *game);
+void close_event(rpg_t *game);
+void menu_screen_button_press_event(rpg_t *game);
+void menu_screen_event(rpg_t *game);
+void menu_screen_button_event(rpg_t *game);
+void draw_button_screen(rpg_t *game);
+void draw_button_screen(rpg_t *game);
+void handle_button_event_screen(button_t *btn, rpg_t *game);
+void menu_scren_button(rpg_t *game);
 void menu_c_event(rpg_t *game);
 void credits(rpg_t *game);
 void button_resize(rpg_t *game, button_t *btn);

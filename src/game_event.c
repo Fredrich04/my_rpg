@@ -63,7 +63,7 @@ void menu_s_button_event(rpg_t *game)
     handle_button_event_s(game->btn->btn_commande, game);
     handle_button_event_s(game->btn->btn_volume_d, game);
     handle_button_event_s(game->btn->btn_volume_up, game);
-    printf("%d\n %d\n", game->mouse_pos.x, game->mouse_pos.y);
+    //printf("%d\n %d\n", game->mouse_pos.x, game->mouse_pos.y);
 }
 
 void menu_s_button_press_event(rpg_t *game)
@@ -74,8 +74,8 @@ void menu_s_button_press_event(rpg_t *game)
      if (sfFloatRect_contains(&game->btn->btn_volume_up->bounds,
          game->mouse_pos.x, game->mouse_pos.y)) {
          game->music->volume = sfMusic_getVolume(game->music->music1);
-         if (game->music->volume + 5 > 100)
-             game->music->volume = 100;
+         if (game->music->volume + 5 > 200)
+             game->music->volume = 200;
          else
              game->music->volume += 5;
      sfMusic_setVolume(game->music->music1, game->music->volume);
@@ -83,7 +83,7 @@ void menu_s_button_press_event(rpg_t *game)
       if (sfFloatRect_contains(&game->btn->btn_volume_d->bounds,
 	 game->mouse_pos.x, game->mouse_pos.y)) {
          game->music->volume = sfMusic_getVolume(game->music->music1);
-          if (game->music->volume - 5 < 0)
+         if (game->music->volume - 5 < 0)
              game->music->volume = 0;
          else
              game->music->volume -= 5;
@@ -98,6 +98,10 @@ void menu_s_button_press_event(rpg_t *game)
           sfMusic_play(game->music->music1);
           game->music->m_bool = 0;
       }
+      if (sfFloatRect_contains(&game->btn->btn_e_size->bounds,
+        game->mouse_pos.x, game->mouse_pos.y))
+        game->main_menu->m = 3;
+
 }
 
 void menu_s_event(rpg_t *game)
@@ -143,7 +147,7 @@ void menu_s(rpg_t *game)
     sfSprite_destroy(game->sprite2);
     sfTexture_destroy(game->texture2);
 }
-
+/*
 void menu_c_event(rpg_t *game)
 {
     while (sfRenderWindow_pollEvent(game->window, &game->event)) {
@@ -162,7 +166,7 @@ void credits(rpg_t *game)
         sfRenderWindow_display(game->window);
     }
 }
-
+*/
 void game_loop(rpg_t *game)
 {
     handle_music(game->music->music1);
@@ -177,7 +181,9 @@ void game_loop(rpg_t *game)
         update_button(game->btn->btn_credits, game->window);
         update_button(game->btn->btn_quitter, game->window);
         sfRenderWindow_clear(game->window, sfBlack);
-        credits(game);
+        menu_scren_button(game);
+        menu_credit_button(game);
+        //credits(game);
         menu_s(game);
         if (game->main_menu->m == 0)
             sfRenderWindow_drawSprite(game->window, game->sprite1, NULL);
