@@ -56,6 +56,7 @@ void game_initialization(rpg_t *game)
     game->main_menu->is_close = 0;
     game->is_close = 0;
     game->music->music1 = sfMusic_createFromFile("assert/music_epic.mp3");
+    load_frames(game);
     init_button(game);
 }
 
@@ -78,6 +79,7 @@ void destroy_game(rpg_t *game)
     sfSprite_destroy(game->sprite1);
     sfTexture_destroy(game->texture1);
     destroy_all_button(game);
+    destroy_loading(game);
     sfRenderWindow_destroy(game->window);
     sfMusic_destroy(game->music->music1);
     free(game->music);

@@ -22,6 +22,7 @@
     #include <time.h>
 
     #define GAME_NAME "Cursed Legacy"
+    #define INTRO_FRAME 30
 
 typedef enum {
     NORMAL,
@@ -65,6 +66,13 @@ typedef struct main_menu {
     int m;
 } main_menu_t;
 
+typedef struct loading {
+    sfSprite *sprite[INTRO_FRAME];
+    sfTexture *txt[INTRO_FRAME];
+    sfClock *clock;
+    float time;
+} loading_t;
+
 typedef struct rpg {
     sfRenderWindow *window;
     sfEvent event;
@@ -76,6 +84,7 @@ typedef struct rpg {
     main_menu_t *main_menu;
     int is_close;
     button_center_t *btn;
+    loading_t *loading;
     music_t *music;
 } rpg_t;
 
@@ -89,6 +98,11 @@ void draw_all_button(rpg_t *game);
 void handle_button_event(button_t *btn, rpg_t *game);
 void destroy_all_button(rpg_t *game);
 
+void load_frames(rpg_t *game);
+void destroy_loading(rpg_t *game);
+void loading(rpg_t *game);
+
+void close_event(rpg_t *game);
 void game_event(rpg_t *game);
 void game_initialization(rpg_t *game);
 void destroy_game(rpg_t *game);
