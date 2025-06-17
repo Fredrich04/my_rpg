@@ -63,7 +63,6 @@ void menu_s_button_event(rpg_t *game)
     handle_button_event_s(game->btn->btn_commande, game);
     handle_button_event_s(game->btn->btn_volume_d, game);
     handle_button_event_s(game->btn->btn_volume_up, game);
-    //printf("%d\n %d\n", game->mouse_pos.x, game->mouse_pos.y);
 }
 
 void menu_s_button_press_event(rpg_t *game)
@@ -147,26 +146,7 @@ void menu_s(rpg_t *game)
     sfSprite_destroy(game->sprite2);
     sfTexture_destroy(game->texture2);
 }
-/*
-void menu_c_event(rpg_t *game)
-{
-    while (sfRenderWindow_pollEvent(game->window, &game->event)) {
-        close_event(game);
-    }
-}
 
-void credits(rpg_t *game)
-{
-    game->mouse_pos = sfMouse_getPositionRenderWindow(game->window);
-    sfSprite_setScale(game->sprite_c, (sfVector2f){1.15, 1.15});
-    while (game->main_menu->m == 2) {
-        menu_c_event(game);
-        sfRenderWindow_clear(game->window, sfBlack);
-        sfRenderWindow_drawSprite(game->window, game->sprite_c, NULL);
-        sfRenderWindow_display(game->window);
-    }
-}
-*/
 void game_loop(rpg_t *game)
 {
     handle_music(game->music->music1);
@@ -183,7 +163,6 @@ void game_loop(rpg_t *game)
         sfRenderWindow_clear(game->window, sfBlack);
         menu_scren_button(game);
         menu_credit_button(game);
-        //credits(game);
         menu_s(game);
         if (game->main_menu->m == 0)
             sfRenderWindow_drawSprite(game->window, game->sprite1, NULL);
