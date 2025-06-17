@@ -14,6 +14,7 @@ void game_initialization(rpg_t *game)
 
 void game_loop(rpg_t *game)
 {
+    fade_in_logo(game->window, "assert/logo.png");
     while (sfRenderWindow_isOpen(game->window)) {
         game_event(game);
         sfRenderWindow_clear(game->window, sfBlack);

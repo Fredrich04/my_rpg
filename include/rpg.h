@@ -30,6 +30,8 @@ typedef struct rpg {
 } rpg_t;
 
 
+void fade_in_logo(sfRenderWindow *window, const char *logo_path);
+
 void game_event(rpg_t *game);
 
 void game_initialization(rpg_t *game);
