@@ -75,6 +75,9 @@ void game_initialization(rpg_t *game)
     game->sprite_e = sfSprite_create();
     game->texture_e = sfTexture_createFromFile("assert/screen.png", NULL);
     sfSprite_setTexture(game->sprite_e, game->texture_e, sfTrue);
+    game->sprite_amy = sfSprite_create();
+    game->texture_amy = sfTexture_createFromFile("assert/amy.png", NULL);
+    sfSprite_setTexture(game->sprite_amy, game->texture_amy, sfTrue);
 }
 
 void destroy_all_button(rpg_t *game)

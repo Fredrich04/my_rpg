@@ -80,6 +80,13 @@ void menu_credit_button_event(rpg_t *game)
             sfSound_play(game->music->sound_btn);
             menu_credit_button_press_event(game);
         }
+      if (game->event.type == sfEvtMouseButtonReleased) {
+          if (game->mouse_pos.x >= 76 && game->mouse_pos.x <= 410 && game->mouse_pos.y >= 116 && game->mouse_pos.y <= 452) {
+              printf("entered\n");
+              sfRenderWindow_drawSprite(game->window, game->sprite_amy, NULL);
+          }
+      }
+      printf("x= %d\n y= %d\n", game->mouse_pos.x, game->mouse_pos.y);
 }
 
 void menu_credit_event(rpg_t *game)
@@ -94,6 +101,7 @@ void menu_credit_button(rpg_t *game)
 {
     sfSprite_setScale(game->sprite_c, (sfVector2f){1.15, 1.15});
     while (game->main_menu->m == 2) {
+        // sfRenderWindow_clear(game->window, sfBlack);
         menu_credit_event(game);
         update_button(game->btn->btn_back_credit, game->window);
         sfRenderWindow_clear(game->window, sfBlack);

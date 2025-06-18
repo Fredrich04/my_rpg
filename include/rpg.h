@@ -90,7 +90,8 @@ typedef struct rpg {
     sfTexture *texture_c;
     sfSprite *sprite_e;
     sfTexture *texture_e;
-
+    sfSprite *sprite_amy;
+    sfTexture *texture_amy;
 } rpg_t;
 
 void handle_button_event_credit(button_t *btn, rpg_t *game);
