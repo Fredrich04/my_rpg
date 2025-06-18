@@ -23,14 +23,24 @@
     #include <time.h>
 
     #define GAME_NAME "Cursed Legacy"
+    #define INTRO_FRAME 51
+
+typedef struct intro {
+    sfSprite *sprite[INTRO_FRAME];
+    sfTexture *txt[INTRO_FRAME];
+    sfClock *clock;
+    float time;
+} intro_t;
 
 typedef struct rpg {
     sfRenderWindow *window;
     sfEvent event;
+    intro_t *intro;
 } rpg_t;
 
 
-void fade_in_logo(sfRenderWindow *window, const char *logo_path);
+void load_intro_frames(rpg_t *game);
+void play_intro(rpg_t *game);
 
 void game_event(rpg_t *game);
 

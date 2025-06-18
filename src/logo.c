@@ -3,55 +3,57 @@
 static float frame_duration;
 static int frame;
 
-void load_frames(rpg_t *game)
+void load_intro_frames(rpg_t *game)
 {
     char filename[64];
 
-    game->loading = malloc(sizeof(loading_t));
-    game->loading->clock = sfClock_create();
+    game->intro = malloc(sizeof(intro_t));
+    game->intro->clock = sfClock_create();
     for (int i = 0; i < INTRO_FRAME; i++) {
-        sprintf(filename, "assert/loading/%d.png", i + 1);
-        game->loading->txt[i] = sfTexture_createFromFile(filename, NULL);
-        if (!game->loading->txt[i])
+        sprintf(filename, "intro_frames1/%d.png", i + 1);
+        game->intro->txt[i] = sfTexture_createFromFile(filename, NULL);
+        if (!game->intro->txt[i])
             continue;
-        game->loading->sprite[i] = sfSprite_create();
-        if (!game->loading->sprite[i])
+        game->intro->sprite[i] = sfSprite_create();
+        if (!game->intro->sprite[i])
             continue;
-        sfSprite_setTexture(game->loading->sprite[i], game->loading->txt[i],
+        sfSprite_setTexture(game->intro->sprite[i], game->intro->txt[i],
             sfTrue);
     }
 }
 
-void loading_events(rpg_t *game)
+void intro_events(rpg_t *game)
 {
     while (sfRenderWindow_pollEvent(game->window, &game->event))
         close_event(game);
 }
 
-void loading(rpg_t *game)
+void play_intro_part2(rpg_t *game)
 {
-    int try = 2;
 
-    frame_duration = 3.5f / 40.0f;
+}
+
+void play_intro(rpg_t *game)
+{
+    int try = 0;
+
+    frame_duration = 5.0f / 40.0f;
     frame = 0;
-    sfClock_restart(game->loading->clock);
+    sfClock_restart(game->intro->clock);
     while (sfRenderWindow_isOpen(game->window)) {
-        loading_events(game);
-        game->loading->time = sfTime_asSeconds(sfClock_getElapsedTime(game->loading->clock));
-        if (game->loading->time >= frame_duration) {
+        intro_events(game);
+        game->intro->time = sfTime_asSeconds(sfClock_getElapsedTime(game->intro->clock));
+        if (game->intro->time >= frame_duration) {
             frame++;
-            sfClock_restart(game->loading->clock);
+            sfClock_restart(game->intro->clock);
         }
-        if (try == 0)
+        if (frame >= INTRO_FRAME - 1) {
             break;
-        if (frame >= INTRO_FRAME) {
-            try--;
-            frame = 0;
         }
         sfRenderWindow_clear(game->window, sfBlack);
-        if (game->loading->sprite[frame])
+        if (game->intro->sprite[frame])
             sfRenderWindow_drawSprite(game->window,
-                game->loading->sprite[frame], NULL);
+                game->intro->sprite[frame], NULL);
         sfRenderWindow_display(game->window);
     }
 }
@@ -59,9 +61,9 @@ void loading(rpg_t *game)
 void destroy_intro(rpg_t *game)
 {
     for (int i = 0; i < INTRO_FRAME; i++) {
-        sfTexture_destroy(game->loading->txt[i]);
-        sfSprite_destroy(game->loading->sprite[i]);
+        sfTexture_destroy(game->intro->txt[i]);
+        sfSprite_destroy(game->intro->sprite[i]);
     }
-    game->loading->clock;
-    free(game->loading);
+    game->intro->clock;
+    free(game->intro);
 }

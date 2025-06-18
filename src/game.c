@@ -10,16 +10,12 @@
 void game_initialization(rpg_t *game)
 {
     game->window = create_window(false);
+    load_intro_frames(game);
 }
 
 void game_loop(rpg_t *game)
 {
-    fade_in_logo(game->window, "assert/logo.png");
-    while (sfRenderWindow_isOpen(game->window)) {
-        game_event(game);
-        sfRenderWindow_clear(game->window, sfBlack);
-        sfRenderWindow_display(game->window);
-    }
+    play_intro(game);
 }
 
 void destroy_game(rpg_t *game)
