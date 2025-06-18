@@ -9,7 +9,7 @@ void load_frames(rpg_t *game)
 
     game->loading = malloc(sizeof(loading_t));
     game->loading->clock = sfClock_create();
-    for (int i = 0; i < INTRO_FRAME; i++) {
+    for (int i = 0; i < LOADING_FRAME; i++) {
         sprintf(filename, "assert/loading/%d.png", i + 1);
         game->loading->txt[i] = sfTexture_createFromFile(filename, NULL);
         if (!game->loading->txt[i])
@@ -44,7 +44,7 @@ void loading(rpg_t *game)
         }
         if (try == 0)
             break;
-        if (frame >= INTRO_FRAME) {
+        if (frame >= LOADING_FRAME) {
             try--;
             frame = 0;
         }
@@ -58,7 +58,7 @@ void loading(rpg_t *game)
 
 void destroy_loading(rpg_t *game)
 {
-    for (int i = 0; i < INTRO_FRAME; i++) {
+    for (int i = 0; i < LOADING_FRAME; i++) {
         sfTexture_destroy(game->loading->txt[i]);
         sfSprite_destroy(game->loading->sprite[i]);
     }

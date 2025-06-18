@@ -22,7 +22,7 @@
     #include <time.h>
 
     #define GAME_NAME "Cursed Legacy"
-    #define INTRO_FRAME 30
+    #define LOADING_FRAME 30
 
 typedef enum {
     NORMAL,
@@ -67,8 +67,8 @@ typedef struct main_menu {
 } main_menu_t;
 
 typedef struct loading {
-    sfSprite *sprite[INTRO_FRAME];
-    sfTexture *txt[INTRO_FRAME];
+    sfSprite *sprite[LOADING_FRAME];
+    sfTexture *txt[LOADING_FRAME];
     sfClock *clock;
     float time;
 } loading_t;
