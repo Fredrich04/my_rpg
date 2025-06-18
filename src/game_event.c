@@ -154,6 +154,7 @@ void game_loop(rpg_t *game)
     game->texture1 = sfTexture_createFromFile("assert/front.png", NULL);
     sfSprite_setTexture(game->sprite1, game->texture1, sfTrue);
     sfSprite_setPosition(game->sprite1, (sfVector2f){0, 0});
+    sfSprite_setScale(game->sprite1, (sfVector2f){0.98, 0.934});
     while (sfRenderWindow_isOpen(game->window)) {
         game_event(game);
         update_button(game->btn->btn_jouer, game->window);
