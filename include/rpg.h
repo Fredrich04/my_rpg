@@ -92,6 +92,7 @@ typedef struct rpg {
     sfTexture *texture_e;
     sfSprite *sprite_amy;
     sfTexture *texture_amy;
+    int hovered;
 } rpg_t;
 
 void handle_button_event_credit(button_t *btn, rpg_t *game);
