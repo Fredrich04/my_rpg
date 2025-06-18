@@ -30,7 +30,7 @@ void intro_events(rpg_t *game)
 
 void play_intro_part2(rpg_t *game)
 {
-
+    
 }
 
 void play_intro(rpg_t *game)
