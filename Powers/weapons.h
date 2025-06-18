@@ -25,25 +25,39 @@
     #include <time.h>
     #define HEADER_H_
 
+typedef enum {
+    ATTACK,
+    DEFENSE,
+    EXORCISM,
+
+}type_t;
+
 typedef struct powers {
     int id;
     bool active_state;
     char *comment;
     char *name;
+    sfSprite **tab;
+    sfSprite *charging_sprite;
+    sfVector2u texture_size;
+    sfVector2f scale;
+    sfTexture *charging_texture;
+    sfSprite *middle_sprite;
+    sfTexture *middle_texture;
+    sfSprite *final_sprite;
+    sfTexture *final_texture;
+    sfSprite *dissipation_sprite;
+    sfTexture *dissipation_texture;
+    sfMusic *lauching_song;
     sfText *comment_text;
-    sfTexture *weapon_texture;
-    sfSprite *weapon_sprite;
-    sfSprite *inventory_sprite;
-    sfTexture *inventory_texture;
-    sfSprite *stuff_sprite;
-    sfTexture *stuff_texture;
-    sfVector2f scale_on_stuff;
-    sfVector2f position_on_stuff;
     int damage;
+    int required_manas;
+    int side_effects;
     char *level;
     struct powers *next;
     struct powers *prev;
     float delta_time;
 } powers_t;
 
+powers_t *ultimate_judgement(void);
 #endif

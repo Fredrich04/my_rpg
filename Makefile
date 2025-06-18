@@ -11,6 +11,10 @@ RM	=	rm -f
 
 SRC2	=	useful/*.c
 
+POWERS	=	Powers/*.c
+
+EXORCISM	=	Powers/Exorcism/*.c
+
 NAME	=	my_rpg
 
 CSFML_FLAG	=	-lcsfml-graphics -lcsfml-window -lcsfml-audio -lcsfml-system
@@ -19,7 +23,9 @@ MATH_FLAG	=	-lm
 
 DEBUG_FLAG	=	-g3
 
-SRC	=	$(SRC1) $(SRC2)
+ALL_POWERS	=	$(EXORCISM) $(POWERS)
+
+SRC	=	$(SRC1) $(SRC2) $(ALL_POWERS)
 
 all:
 	gcc -o $(NAME) $(SRC) $(CSFML_FLAG) $(MATH_FLAG) $(DEBUG_FLAG)

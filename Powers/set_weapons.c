@@ -16,26 +16,31 @@ static powers_t *create_weapon(void)
 
 powers_t *fill_data_part1(powers_t *new, powers_t *to_add)
 {
-    new->delta_time = to_add->delta_time;
-    new->damage = to_add->damage;
-    new->level = strdup(to_add->level);
     new->active_state = to_add->active_state;
+    new->charging_sprite = to_add->charging_sprite;
+    new->charging_texture = to_add->charging_texture;
     new->comment = strdup(to_add->comment);
-    new->weapon_sprite = to_add->weapon_sprite;
-    new->weapon_texture = to_add->weapon_texture;
+    new->comment_text = to_add->comment_text;
+    new->damage = to_add->damage;
+    new->delta_time = to_add->delta_time;
+    new->dissipation_sprite = to_add->dissipation_sprite;
+    new->dissipation_texture = to_add->dissipation_texture;
+    new->final_sprite = to_add->final_sprite;
+    new->final_texture = to_add->final_texture;
     return new;
 }
 
 powers_t *fill_data_part2(powers_t *new, powers_t *to_add)
 {
-    new->inventory_sprite = to_add->inventory_sprite;
-    new->inventory_texture = to_add->inventory_texture;
-    new->stuff_texture = to_add->stuff_texture;
-    new->stuff_sprite = to_add->stuff_sprite;
-    new->scale_on_stuff = to_add->scale_on_stuff;
-    sfSprite_setTexture(new->inventory_sprite, new->inventory_texture, sfTrue);
-    sfSprite_setTexture(new->stuff_sprite, new->stuff_texture, sfTrue);
+    new->id = to_add->id;
+    new->lauching_song = to_add->lauching_song;
+    new->lauching_song = to_add->lauching_song;
+    new->level = to_add->level;
+    new->middle_sprite = to_add->middle_sprite;
+    new->middle_texture = to_add->middle_texture;
     new->name = strdup(to_add->name);
+    new->required_manas = to_add->required_manas;
+    new->side_effects = to_add->side_effects;
     return new;
 }
 
@@ -64,5 +69,6 @@ powers_t *add_weapon(powers_t **head, powers_t *to_add)
 powers_t *load_weapons_in_list(powers_t *weapons)
 {
     weapons = NULL;
+    add_weapon(&weapons, ultimate_judgement());
     return weapons;
 }

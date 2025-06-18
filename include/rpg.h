@@ -20,13 +20,18 @@
     #include <SFML/Window.h>
     #include <math.h>
     #include <time.h>
+    #include "../Powers/weapons.h"
 
     #define GAME_NAME "Cursed Legacy"
 
 typedef struct rpg {
     sfRenderWindow *window;
     sfEvent event;
+    powers_t *powers;
 } rpg_t;
+
+
+powers_t *load_weapons_in_list(powers_t *weapons);
 
 
 void game_event(rpg_t *game);
