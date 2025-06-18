@@ -1,46 +1,67 @@
-#include <SFML/Graphics.h>
-#include <SFML/System.h>
+#include "../include/rpg.h"
 
-void fade_in_logo(sfRenderWindow *window, const char *logo_path)
+static float frame_duration;
+static int frame;
+
+void load_frames(rpg_t *game)
 {
-    sfTexture *logo_texture = sfTexture_createFromFile(logo_path, NULL);
-    if (!logo_texture)
-        return;
-    sfSprite *logo_sprite = sfSprite_create();
-    sfSprite_setTexture(logo_sprite, logo_texture, sfTrue);
+    char filename[64];
 
-    sfVector2u win_size = sfRenderWindow_getSize(window);
-    sfVector2u tex_size = sfTexture_getSize(logo_texture);
-    sfVector2f pos = {(win_size.x - tex_size.x) / 2.0f, (win_size.y - tex_size.y) / 2.0f};
-    sfSprite_setPosition(logo_sprite, pos);
-
-    sfClock *clock = sfClock_create();
-    sfUint8 alpha = 0;
-
-    while (alpha < 255) {
-        sfEvent event;
-        while (sfRenderWindow_pollEvent(window, &event)) {
-            if (event.type == sfEvtClosed)
-                sfRenderWindow_close(window);
-        }
-
-        sfTime time = sfClock_getElapsedTime(clock);
-        if (sfTime_asMilliseconds(time) > 10) {
-            alpha += 3;
-            if (alpha > 255) alpha = 255;
-
-            sfColor color = sfColor_fromRGBA(255, 255, 255, alpha);
-            sfSprite_setColor(logo_sprite, color);
-
-            sfRenderWindow_clear(window, sfBlack);
-            sfRenderWindow_drawSprite(window, logo_sprite, NULL);
-            sfRenderWindow_display(window);
-
-            sfClock_restart(clock);
-        }
+    game->loading = malloc(sizeof(loading_t));
+    game->loading->clock = sfClock_create();
+    for (int i = 0; i < INTRO_FRAME; i++) {
+        sprintf(filename, "assert/loading/%d.png", i + 1);
+        game->loading->txt[i] = sfTexture_createFromFile(filename, NULL);
+        if (!game->loading->txt[i])
+            continue;
+        game->loading->sprite[i] = sfSprite_create();
+        if (!game->loading->sprite[i])
+            continue;
+        sfSprite_setTexture(game->loading->sprite[i], game->loading->txt[i],
+            sfTrue);
     }
-    //sfSleep(sfSeconds(1.5));
-    sfTexture_destroy(logo_texture);
-    sfSprite_destroy(logo_sprite);
-    sfClock_destroy(clock);
+}
+
+void loading_events(rpg_t *game)
+{
+    while (sfRenderWindow_pollEvent(game->window, &game->event))
+        close_event(game);
+}
+
+void loading(rpg_t *game)
+{
+    int try = 2;
+
+    frame_duration = 3.5f / 40.0f;
+    frame = 0;
+    sfClock_restart(game->loading->clock);
+    while (sfRenderWindow_isOpen(game->window)) {
+        loading_events(game);
+        game->loading->time = sfTime_asSeconds(sfClock_getElapsedTime(game->loading->clock));
+        if (game->loading->time >= frame_duration) {
+            frame++;
+            sfClock_restart(game->loading->clock);
+        }
+        if (try == 0)
+            break;
+        if (frame >= INTRO_FRAME) {
+            try--;
+            frame = 0;
+        }
+        sfRenderWindow_clear(game->window, sfBlack);
+        if (game->loading->sprite[frame])
+            sfRenderWindow_drawSprite(game->window,
+                game->loading->sprite[frame], NULL);
+        sfRenderWindow_display(game->window);
+    }
+}
+
+void destroy_intro(rpg_t *game)
+{
+    for (int i = 0; i < INTRO_FRAME; i++) {
+        sfTexture_destroy(game->loading->txt[i]);
+        sfSprite_destroy(game->loading->sprite[i]);
+    }
+    game->loading->clock;
+    free(game->loading);
 }
