@@ -16,9 +16,9 @@ powers_t *ultimate_judgement(void)
    // power->charging_sprite = sfSprite_create();
     power->charging_texture = sfTexture_createFromFile("./Powers/global_images/load_judgements.png", NULL);
     //power->middle_sprite = sfSprite_create();
-    //power->middle_texture = sfTexture_createFromFile("./Powers/global_images/end_judgements.png", NULL);
+    power->middle_texture = sfTexture_createFromFile("./Powers/global_images/end_judgements.png", NULL);
     //power->dissipation_sprite = sfSprite_create();
-    //power->dissipation_texture = sfTexture_createFromFile("./Powers/global_images/dissipate_judgements.png", NULL);
+    power->dissipation_texture = sfTexture_createFromFile("./Powers/global_images/dissipate_judgements.png", NULL);
    
    
     power->tab = malloc(sizeof(sfSprite *) * 3);
