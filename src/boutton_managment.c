@@ -32,20 +32,17 @@ button_t *create_button(sfTexture *texture, sfVector2f pos, sfVector2f scale)
     btn->duration = 0.0f;
     btn->elapsed = 0.0f;
     btn->state = NORMAL;
-    btn->bounds = (sfFloatRect){0};
-    btn->echelle = (sfVector2f){(float)pos.x / SCREEN_WIDTH, (float)pos.y / SCREEN_HEIGHT}; 
+    btn->bounds = (sfFloatRect){0}; 
     return btn;
 }
 
 void button_resize(rpg_t *game, button_t *btn)
 {
-    sfVector2u w_size = sfRenderWindow_getSize(game->window);
-    sfVector2f new_scale = {(float) btn->echelle.x / w_size.x, (float) btn->echelle.y / w_size.y};
-    float took_scale = fminf(new_scale.x, new_scale.y);
-    sfVector2f new_position = {(float) btn->echelle.x * w_size.x, (float) btn->echelle.y * w_size.y};
-    sfVector2f scale = {btn->current_scale.x * took_scale, btn->current_scale.y * took_scale};
-    sfSprite_setPosition (btn->sprite, new_position);
-    sfSprite_setScale (btn->sprite, scale);
+    game->winSize = sfRenderWindow_getSize(game->window);
+    sfVector2f new_position = {btn->original_pos.x * game->new_scale.x, btn->original_pos.y * game->new_scale.y};
+    sfVector2f scale = {btn->current_scale.x * game->new_scale.x, btn->current_scale.y * game->new_scale.y};
+    sfSprite_setPosition(btn->sprite, new_position);
+    sfSprite_setScale(btn->sprite, game->new_scale);
 }
 
 void update_button(button_t *btn, sfRenderWindow *window)
@@ -112,10 +109,15 @@ static void pressed_and_hovered_action(button_t *btn, rpg_t *game,
 
 void handle_button_event(button_t *btn, rpg_t *game)
 {
-    sfBool is_hovered = sfFloatRect_contains(&btn->bounds, game->mouse_pos.x,
-        game->mouse_pos.y);
+    sfBool is_hovered;
 
     btn->bounds = sfSprite_getGlobalBounds(btn->sprite);
+    btn->bounds.height *= game->new_scale.y;
+    btn->bounds.left *= game->new_scale.x;
+    btn->bounds.top *= game->new_scale.y;
+    btn->bounds.width *= game->new_scale.x;
+    is_hovered = sfFloatRect_contains(&btn->bounds, game->mouse_pos.x,
+        game->mouse_pos.y);
     pressed_and_hovered_detection(btn, game, is_hovered);
     pressed_and_hovered_action(btn, game, is_hovered);
 }

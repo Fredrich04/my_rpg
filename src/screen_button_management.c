@@ -52,10 +52,15 @@ static void pressed_and_hovered_action_screen(button_t *btn, rpg_t *game,
 
 void handle_button_event_screen(button_t *btn, rpg_t *game)
 {
-    sfBool is_hovered = sfFloatRect_contains(&btn->bounds, game->mouse_pos.x,
-        game->mouse_pos.y);
+    sfBool is_hovered;
 
     btn->bounds = sfSprite_getGlobalBounds(btn->sprite);
+    btn->bounds.height *= game->new_scale.y;
+    btn->bounds.left *= game->new_scale.x;
+    btn->bounds.top *= game->new_scale.y;
+    btn->bounds.width *= game->new_scale.x;
+    is_hovered = sfFloatRect_contains(&btn->bounds, game->mouse_pos.x,
+        game->mouse_pos.y);
     pressed_and_hovered_detection_screen(btn, game, is_hovered);
     pressed_and_hovered_action_screen(btn, game, is_hovered);
 }
@@ -74,7 +79,7 @@ void menu_screen_button_press_event(rpg_t *game)
 
 void menu_screen_button_event(rpg_t *game)
 {
-    game->mouse_pos = sfMouse_getPositionRenderWindow(game->window);
+    sfMouse_getPositionResized(game);
     handle_button_event_screen(game->btn->btn_back_screen, game);
      if (game->event.type == sfEvtMouseButtonPressed) {
             sfSound_play(game->music->sound_btn);
@@ -85,14 +90,14 @@ void menu_screen_button_event(rpg_t *game)
 void menu_screen_event(rpg_t *game)
 {
     while (sfRenderWindow_pollEvent(game->window, &game->event)) {
-	close_event(game);
+	    close_event(game);
         menu_screen_button_event(game);
     }
 }
 
 void menu_scren_button(rpg_t *game)
 {
-    sfSprite_setScale(game->sprite_e, (sfVector2f){0.96, 0.96});
+    sfSprite_setScale(game->sprite_e, game->new_scale);
     while (game->main_menu->m == 3) {
         menu_screen_event(game);
         update_button(game->btn->btn_back_screen, game->window);

@@ -16,13 +16,13 @@ void init_button_part2(rpg_t *game)
         "assert/commande.png", NULL), (sfVector2f){380, 500},
         (sfVector2f){0.85f, 0.85f});
     game->btn->btn_e_size = create_button(sfTexture_createFromFile(
-        "assert/s_r.png", NULL), (sfVector2f){800, 730},
+        "assert/s_r.png", NULL), (sfVector2f){780, 830},
         (sfVector2f){0.85f, 0.85f});
     game->btn->btn_muet = create_button(sfTexture_createFromFile(
-        "assert/muet.png", NULL), (sfVector2f){1100, 500},
+        "assert/muet.png", NULL), (sfVector2f){1050, 500},
         (sfVector2f){0.85f, 0.85f});
     game->btn->btn_retour = create_button(sfTexture_createFromFile(
-        "assert/retour.png", NULL), (sfVector2f){200, 920},
+        "assert/retour.png", NULL), (sfVector2f){200, 990},
         (sfVector2f){0.75f, 0.75f});
 }
 
@@ -44,7 +44,7 @@ void init_button(rpg_t *game)
         "assert/volume_up.png", NULL), (sfVector2f){380, 250},
         (sfVector2f){0.85f, 0.85f});
      game->btn->btn_back_screen = create_button(sfTexture_createFromFile(
-        "assert/back_screen.png", NULL), (sfVector2f){140, 140},
+        "assert/back_screen.png", NULL), (sfVector2f){140, 900},
         (sfVector2f){0.85f, 0.85f});
      game->btn->btn_back_credit = create_button(sfTexture_createFromFile(
         "assert/back_credit.png", NULL), (sfVector2f){140, 900},
@@ -59,9 +59,19 @@ void game_initialization(rpg_t *game)
     game->btn = malloc(sizeof(button_center_t));
     game->main_menu = malloc(sizeof(main_menu_t));
     game->window = create_window(false);
+    game->winView = (sfView *)sfRenderWindow_getView(game->window);
+    game->defaultWinSize = (sfVector2f){1920.0f, 1080.0f};
+    game->new_scale = (sfVector2f){1, 1};
+    game->sprite1 = sfSprite_create();
+    game->texture1 = sfTexture_createFromFile("assert/front.png", NULL);
     game->main_menu->m = 0;
     game->main_menu->is_close = 0;
     game->is_close = 0;
+    game->sprite2 = sfSprite_create();
+    game->texture2 = sfTexture_createFromFile("assert/menu_s1.png", NULL);
+    sfSprite_setTexture(game->sprite2, game->texture2, sfTrue);
+    sfSprite_setPosition(game->sprite2, (sfVector2f){-1, -1});
+    sfSprite_setScale(game->sprite2, (sfVector2f){0.98, 0.934});
     game->music->music1 = sfMusic_createFromFile("assert/music_epic.mp3");
     init_button(game);
     game->music->m_bool = 0;
@@ -70,7 +80,7 @@ void game_initialization(rpg_t *game)
     game->music->sound_btn_buf = sfSoundBuffer_createFromFile("assert/menu_sounds.wav");
     sfSound_setBuffer(game->music->sound_btn, game->music->sound_btn_buf);
     game->sprite_c = sfSprite_create();
-    game->texture_c = sfTexture_createFromFile("assert/credits.jpeg", NULL);
+    game->texture_c = sfTexture_createFromFile("assert/credits.jpg", NULL);
     sfSprite_setTexture(game->sprite_c, game->texture_c, sfTrue);
     game->sprite_e = sfSprite_create();
     game->texture_e = sfTexture_createFromFile("assert/screen.png", NULL);
@@ -101,6 +111,8 @@ void destroy_game(rpg_t *game)
     sfTexture_destroy(game->texture_c);
     sfSprite_destroy(game->sprite_e);
     sfTexture_destroy(game->texture_e);
+    sfSprite_destroy(game->sprite2);
+    sfTexture_destroy(game->texture2);
     destroy_all_button(game);
     sfRenderWindow_destroy(game->window);
     sfMusic_destroy(game->music->music1);

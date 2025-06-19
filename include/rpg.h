@@ -76,12 +76,17 @@ typedef struct main_menu {
 
 typedef struct rpg {
     sfRenderWindow *window;
+    sfVector2f defaultWinSize;
+    sfView *winView;
+    sfVector2f newWinSize;
+    sfVector2f new_scale;
     sfEvent event;
     sfTexture *texture1;
     sfSprite *sprite1;
     sfVector2i mouse_pos;
     sfTexture *texture2;
     sfSprite *sprite2;
+    sfVector2u winSize;
     main_menu_t *main_menu;
     int is_close;
     button_center_t *btn;
@@ -90,8 +95,10 @@ typedef struct rpg {
     sfTexture *texture_c;
     sfSprite *sprite_e;
     sfTexture *texture_e;
-
 } rpg_t;
+
+
+void sfMouse_getPositionResized(rpg_t *game);
 
 void handle_button_event_credit(button_t *btn, rpg_t *game);
 void draw_button_credit(rpg_t *game);
@@ -118,9 +125,9 @@ button_t *create_button(sfTexture *texture, sfVector2f pos, sfVector2f scale);
 void update_button(button_t *btn, sfRenderWindow *window);
 void draw_all_button(rpg_t *game);
 void handle_button_event(button_t *btn, rpg_t *game);
+void main_menu_event(rpg_t *game);
 void destroy_all_button(rpg_t *game);
 
-void game_event(rpg_t *game);
 void game_initialization(rpg_t *game);
 void destroy_game(rpg_t *game);
 void game_loop(rpg_t *game);
