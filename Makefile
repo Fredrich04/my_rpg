@@ -11,6 +11,8 @@ RM	=	rm -f
 
 SRC2	=	useful/*.c
 
+SRC3	=	environnement/*.c
+
 NAME	=	my_rpg
 
 CSFML_FLAG	=	-lcsfml-graphics -lcsfml-window -lcsfml-audio -lcsfml-system
@@ -19,7 +21,7 @@ MATH_FLAG	=	-lm
 
 DEBUG_FLAG	=	-g3
 
-SRC	=	$(SRC1) $(SRC2)
+SRC	=	$(SRC1) $(SRC2) $(SRC3)
 
 all:
 	gcc -o $(NAME) $(SRC) $(CSFML_FLAG) $(MATH_FLAG) $(DEBUG_FLAG)
