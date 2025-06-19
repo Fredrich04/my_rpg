@@ -127,7 +127,7 @@ void update_menu_s_button(rpg_t *game)
 void menu_s(rpg_t *game)
 {
     game->sprite2 = sfSprite_create();
-    game->texture2 = sfTexture_createFromFile("assert/menu_s1.png", NULL);
+    game->texture2 = sfTexture_createFromFile("assert/option/menu_s1.png", NULL);
     sfSprite_setTexture(game->sprite2, game->texture2, sfTrue);
     sfSprite_setPosition(game->sprite2, (sfVector2f){-1, -1});
     sfSprite_setScale(game->sprite2, (sfVector2f){0.98, 0.934});
@@ -148,7 +148,7 @@ void game_loop(rpg_t *game)
 {
     handle_music(game->music->music1);
     game->sprite1 = sfSprite_create();
-    game->texture1 = sfTexture_createFromFile("assert/front.png", NULL);
+    game->texture1 = sfTexture_createFromFile("assert/main menu/front.png", NULL);
     sfSprite_setTexture(game->sprite1, game->texture1, sfTrue);
     sfSprite_setPosition(game->sprite1, (sfVector2f){0, 0});
     while (sfRenderWindow_isOpen(game->window)) {
