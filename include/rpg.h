@@ -30,9 +30,10 @@ typedef struct rpg {
     powers_t *powers;
 } rpg_t;
 
+sfCircleShape **draw_ui(void);
 
 powers_t *load_weapons_in_list(powers_t *weapons);
-
+void draw_circle_for_powers(sfRenderWindow *window, sfCircleShape **tab);
 
 void game_event(rpg_t *game);
 

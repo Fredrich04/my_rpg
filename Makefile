@@ -5,6 +5,8 @@
 ## Makefile
 ##
 
+DECOR	=	Fight_decor/*.c
+
 SRC1	=	src/*.c
 
 RM	=	rm -f
@@ -23,7 +25,7 @@ MATH_FLAG	=	-lm
 
 DEBUG_FLAG	=	-g3
 
-ALL_POWERS	=	$(EXORCISM) $(POWERS)
+ALL_POWERS	=	$(EXORCISM) $(POWERS) $(DECOR)
 
 SRC	=	$(SRC1) $(SRC2) $(ALL_POWERS)
 
