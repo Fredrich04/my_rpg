@@ -53,7 +53,7 @@ void init_button(rpg_t *game)
         "assert/volume_up.png", NULL), (sfVector2f){380, 250},
         (sfVector2f){0.85f, 0.85f});
      game->btn->btn_back_screen = create_button(sfTexture_createFromFile(
-        "assert/back_screen.png", NULL), (sfVector2f){140, 900},
+        "assert/back_screen.png", NULL), (sfVector2f){140, 950},
         (sfVector2f){0.85f, 0.85f});
      game->btn->btn_back_credit = create_button(sfTexture_createFromFile(
         "assert/back_credit.png", NULL), (sfVector2f){140, 900},
@@ -99,6 +99,7 @@ void game_initialization(rpg_t *game)
     game->defaultWinSize = (sfVector2f){1920.0f, 1080.0f};
     game->new_scale = (sfVector2f){1, 1};
     game->main_menu->m = 0;
+    game->is_resize = false;
     game->main_menu->is_close = 0;
     game->is_close = 0;
     init_button(game);

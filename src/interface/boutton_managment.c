@@ -28,7 +28,7 @@ button_t *create_button(sfTexture *texture, sfVector2f pos, sfVector2f scale)
     btn->elapsed = 0.0f;
     btn->state = NORMAL;
     btn->bounds = (sfFloatRect){0};
-   // sfTexture_destroy(texture);
+    //sfTexture_destroy(texture);
     return btn;
 }
 
@@ -36,8 +36,8 @@ void button_resize(rpg_t *game, button_t *btn)
 {
     sfVector2f new_position = {btn->original_pos.x * game->new_scale.x,
         btn->original_pos.y * game->new_scale.y};
-    sfVector2f scale = {btn->current_scale.x * game->new_scale.x,
-        btn->current_scale.y * game->new_scale.y};
+    sfVector2f scale = {btn->default_scale.x * game->new_scale.x,
+        btn->default_scale.y * game->new_scale.y};
 
     sfSprite_setPosition(btn->sprite, new_position);
     sfSprite_setScale(btn->sprite, game->new_scale);

@@ -103,23 +103,5 @@ void main_menu_event(rpg_t *game)
             sfSound_play(game->music->sound_btn);
             main_menu_button_press_event(game);
         }
-        if (game->event.type == sfEvtResized) {
-            game->newWinSize = (sfVector2f){(float)game->event.size.width, (float)game->event.size.height};
-            game->new_scale = (sfVector2f){game->newWinSize.x / game->defaultWinSize.x, game->newWinSize.y / game->defaultWinSize.y};
-            sfView_setSize(game->winView, game->newWinSize);
-            sfView_setCenter(game->winView, (sfVector2f){game->newWinSize.x / 2.f, game->newWinSize.y / 2.f});
-            sfRenderWindow_setView(game->window, game->winView);
-            button_resize(game, game->btn->btn_jouer);
-            button_resize(game, game->btn->btn_credits);
-            button_resize(game, game->btn->btn_options);
-            button_resize(game, game->btn->btn_quitter);
-            button_resize(game, game->btn->btn_volume_d);
-            button_resize(game, game->btn->btn_volume_up);
-            button_resize(game, game->btn->btn_e_size);
-            button_resize(game, game->btn->btn_retour);
-            button_resize(game, game->btn->btn_back_screen);
-            button_resize(game, game->btn->btn_back_credit);
-            button_resize(game, game->btn->btn_size1);
-        }
     }
 }

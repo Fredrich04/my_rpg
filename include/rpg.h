@@ -91,6 +91,10 @@ typedef struct rpg {
     main_menu_t *main_menu;
     int is_close;
     button_center_t *btn;
+    bool is_resize;
+    bool is_fullscreen;
+    bool resize_window;
+    sfFloatRect view_rect;
     music_t *music;
     sfSprite *sprite_c;
     sfTexture *texture_c;
