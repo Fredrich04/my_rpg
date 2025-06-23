@@ -5,8 +5,8 @@
 ** start.h
 */
 
-#ifndef START_H
-  #define START_H
+#ifndef RPG_H
+  #define RPG_H
 
     #include <string.h>
     #include <stddef.h>
@@ -22,6 +22,7 @@
     #include <time.h>
 
     #define GAME_NAME "Cursed Legacy"
+    #define LOADING_FRAME 30
 
 typedef enum {
     NORMAL,
@@ -75,6 +76,13 @@ typedef struct main_menu {
     int m;
 } main_menu_t;
 
+typedef struct loading {
+    sfSprite *sprite[LOADING_FRAME];
+    sfTexture *txt[LOADING_FRAME];
+    sfClock *clock;
+    float time;
+} loading_t;
+
 typedef struct rpg {
     sfRenderWindow *window;
     sfVector2f defaultWinSize;
@@ -95,6 +103,7 @@ typedef struct rpg {
     bool is_fullscreen;
     bool resize_window;
     sfFloatRect view_rect;
+    loading_t *loading;
     music_t *music;
     sfSprite *sprite_c;
     sfTexture *texture_c;
@@ -148,7 +157,13 @@ void update_button(button_t *btn, sfRenderWindow *window);
 void destroy_all_button(rpg_t *game);
 
 
+void load_frames(rpg_t *game);
+void destroy_loading(rpg_t *game);
+void loading(rpg_t *game);
+
+
 void close_event(rpg_t *game);
+void game_event(rpg_t *game);
 void game_initialization(rpg_t *game);
 void destroy_game(rpg_t *game);
 void game_loop(rpg_t *game);

@@ -102,6 +102,7 @@ void game_initialization(rpg_t *game)
     game->is_resize = false;
     game->main_menu->is_close = 0;
     game->is_close = 0;
+    load_frames(game);
     init_button(game);
     game->mouse_pos = (sfVector2i){0, 0};
     init_bachground(game);
@@ -138,10 +139,12 @@ void destroy_game(rpg_t *game)
     sfSprite_destroy(game->sprite2);
     sfTexture_destroy(game->texture2);
     destroy_all_button(game);
+    destroy_loading(game);
     sfRenderWindow_destroy(game->window);
     sfMusic_destroy(game->music->music1);
     sfSound_destroy(game->music->sound_btn);
     sfSoundBuffer_destroy(game->music->sound_btn_buf);
+    destroy_loading(game);
     free(game->music);
     free(game);
 }
