@@ -5,14 +5,13 @@
 ** bsm
 */
 
-#include "../include/rpg.h"
-
+#include "../../include/rpg.h"
 
 static void pressed_and_hovered_detection_screen(button_t *btn, rpg_t *game,
     sfBool is_hovered)
 {
     if (is_hovered && btn->state != PRESSED && btn->final_scale.x != 0.96f) {
-	btn->current_scale = btn->current_scale;
+	    btn->current_scale = btn->current_scale;
         btn->final_scale = (sfVector2f){0.96f, 0.96f};
         btn->duration = 0.2f;
         btn->elapsed = 0.0f;
@@ -32,20 +31,20 @@ static void pressed_and_hovered_action_screen(button_t *btn, rpg_t *game,
     sfBool is_hovered)
 {
     if (is_hovered && game->event.type == sfEvtMouseButtonPressed
-	&& game->event.mouseButton.button == sfMouseLeft) {
-	btn->current_scale = btn->current_scale;
-	btn->final_scale = (sfVector2f){0.9f, 0.9f};
-	btn->duration = 0.1f;
-	btn->elapsed = 0.0f;
-	btn->state = PRESSED;
+	    && game->event.mouseButton.button == sfMouseLeft) {
+	    btn->current_scale = btn->current_scale;
+	    btn->final_scale = (sfVector2f){0.9f, 0.9f};
+	    btn->duration = 0.1f;
+	    btn->elapsed = 0.0f;
+	    btn->state = PRESSED;
     }
     if (btn->state == PRESSED && game->event.type == sfEvtMouseButtonReleased
-	&& game->event.mouseButton.button == sfMouseLeft) {
-	btn->current_scale = (sfVector2f){0.75f, 0.75f};
-	btn->final_scale = btn->default_scale;
-	btn->duration = 0.1f;
-	btn->elapsed = 0.0f;
-	btn->state = RETURNING;
+	    && game->event.mouseButton.button == sfMouseLeft) {
+	    btn->current_scale = (sfVector2f){0.75f, 0.75f};
+	    btn->final_scale = btn->default_scale;
+	    btn->duration = 0.1f;
+	    btn->elapsed = 0.0f;
+	    btn->state = RETURNING;
     }
     sfClock_restart(btn->clock);
 }
@@ -68,6 +67,9 @@ void handle_button_event_screen(button_t *btn, rpg_t *game)
 void draw_button_screen(rpg_t *game)
 {
     draw_button(game->btn->btn_back_screen, game->window);
+    draw_button(game->btn->btn_size1, game->window);
+    draw_button(game->btn->btn_size2, game->window);
+    draw_button(game->btn->btn_size3, game->window);
 }
 
 void menu_screen_button_press_event(rpg_t *game)
@@ -81,10 +83,13 @@ void menu_screen_button_event(rpg_t *game)
 {
     sfMouse_getPositionResized(game);
     handle_button_event_screen(game->btn->btn_back_screen, game);
-     if (game->event.type == sfEvtMouseButtonPressed) {
-            sfSound_play(game->music->sound_btn);
-            menu_screen_button_press_event(game);
-        }
+    handle_button_event_screen(game->btn->btn_size1, game);
+    handle_button_event_screen(game->btn->btn_size2, game);
+    handle_button_event_screen(game->btn->btn_size3, game);
+    if (game->event.type == sfEvtMouseButtonPressed) {
+        sfSound_play(game->music->sound_btn);
+        menu_screen_button_press_event(game);
+    }
 }
 
 void menu_screen_event(rpg_t *game)
@@ -101,6 +106,9 @@ void menu_scren_button(rpg_t *game)
     while (game->main_menu->m == 3) {
         menu_screen_event(game);
         update_button(game->btn->btn_back_screen, game->window);
+        update_button(game->btn->btn_size1, game->window);
+        update_button(game->btn->btn_size2, game->window);
+        update_button(game->btn->btn_size3, game->window);
         sfRenderWindow_clear(game->window, sfBlack);
         sfRenderWindow_drawSprite(game->window, game->sprite_e, NULL);
         draw_button_screen(game);

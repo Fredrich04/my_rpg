@@ -5,8 +5,7 @@
 ** cbm
 */
 
-#include "../include/rpg.h"
-
+#include "../../include/rpg.h"
 
 static void pressed_and_hovered_detection_credit(button_t *btn, rpg_t *game,
     sfBool is_hovered)
