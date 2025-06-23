@@ -4,10 +4,13 @@
 ** File description:
 ** A file that will handle the drawing of ui during fights
 */
-#include "decor.h"
 
-sfCircleShape **draw_ui(void)
+#include "../include/rpg.h"
+
+void draw_ui(rpg_t *game, character_t *character,
+    ennemies_t *ennemies)
 {
-    sfCircleShape **tab = create_circle_for_powers();
-    return tab;
+    draw_character_ui(game, character);
+    draw_ennemies_ui(game, ennemies);
+    return;
 }

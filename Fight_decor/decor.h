@@ -5,8 +5,8 @@
 ** start.h
 */
 
-#ifndef START_H
-  #define START_H
+#ifndef START_D
+  #define START_D
 
     #include <string.h>
     #include <stddef.h>
@@ -20,6 +20,22 @@
     #include <SFML/Window.h>
     #include <math.h>
     #include <time.h>
+    #include "../Powers/weapons.h"
 
-sfCircleShape **create_circle_for_powers(void);
+typedef struct character {
+  powers_t *powers;
+  char *rank;
+  int level;
+  int pv;
+  int manas;
+  int exp;
+  char **all_ranks;
+} character_t;
+
+typedef struct ennemies {
+  char *rank;
+  int level;
+  int pv;
+} ennemies_t;
+
 #endif

@@ -21,6 +21,7 @@
     #include <math.h>
     #include <time.h>
     #include "../Powers/weapons.h"
+    #include "../Fight_decor/decor.h"
 
     #define GAME_NAME "Cursed Legacy"
 
@@ -30,10 +31,13 @@ typedef struct rpg {
     powers_t *powers;
 } rpg_t;
 
-sfCircleShape **draw_ui(void);
-
+character_t *create_main_character_ui(powers_t *powers);
+ennemies_t *create_ennemie_ui(void);
+void draw_ui(rpg_t *game, character_t *character,
+    ennemies_t *ennemies);
+void draw_character_ui(rpg_t *game, character_t *character);
+void draw_ennemies_ui(rpg_t *game, ennemies_t *ennemies);
 powers_t *load_weapons_in_list(powers_t *weapons);
-void draw_circle_for_powers(sfRenderWindow *window, sfCircleShape **tab);
 
 void game_event(rpg_t *game);
 
