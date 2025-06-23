@@ -24,7 +24,7 @@ void close_event(rpg_t *game)
     }
 }
 
-void game_loop(rpg_t *game)
+void main_menu(rpg_t *game)
 {
     handle_music(game->music->music1);
     while (sfRenderWindow_isOpen(game->window)) {

@@ -82,7 +82,7 @@ void init_bachground(rpg_t *game)
     sfSprite_setPosition(game->sprite2, (sfVector2f){-1, -1});
     sfSprite_setScale(game->sprite2, (sfVector2f){0.98, 0.934});
     game->sprite_c = sfSprite_create();
-    game->texture_c = sfTexture_createFromFile("assert/credit/credits.jpeg", NULL);
+    game->texture_c = sfTexture_createFromFile("assert/credit/credits.jpg", NULL);
     sfSprite_setTexture(game->sprite_c, game->texture_c, sfTrue);
     game->sprite_e = sfSprite_create();
     game->texture_e = sfTexture_createFromFile("assert/option/screen.png", NULL);

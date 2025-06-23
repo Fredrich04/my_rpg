@@ -113,6 +113,7 @@ void main_menu_button_press_event(rpg_t *game);
 void draw_all_button(rpg_t *game);
 void handle_button_event(button_t *btn, rpg_t *game);
 void main_menu_event(rpg_t *game);
+void main_menu(rpg_t *game);
 
 
 void handle_button_event_credit(button_t *btn, rpg_t *game);
