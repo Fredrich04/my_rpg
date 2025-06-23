@@ -11,7 +11,8 @@ RM	=	rm -f
 
 SRC2	=	useful/*.c
 
-INTERFACE	=	src/interface/*.c
+INTERFACE	=	src/interface/*.c	\
+				src/interface/option/*.c
 
 NAME	=	my_rpg
 
@@ -34,7 +35,7 @@ clean:
 
 fclean:	clean
 	$(RM) $(NAME)
-	rm -f coding-style-reports.log 
+	rm -f coding-style-reports.log
 
 re:	fclean all
 

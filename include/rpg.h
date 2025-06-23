@@ -115,10 +115,9 @@ typedef struct rpg {
 } rpg_t;
 
 
-void sfMouse_getPositionResized(rpg_t *game);
+void sfmouse_get_position_resized(rpg_t *game);
 
 
-void main_menu_button_press_event(rpg_t *game);
 void draw_all_button(rpg_t *game);
 void handle_button_event(button_t *btn, rpg_t *game);
 void main_menu_event(rpg_t *game);
@@ -138,14 +137,14 @@ void credits(rpg_t *game);
 void draw_button_screen(rpg_t *game);
 void draw_button_screen(rpg_t *game);
 void handle_button_event_screen(button_t *btn, rpg_t *game);
-void menu_screen_button_press_event(rpg_t *game);
 void menu_screen_event(rpg_t *game);
-void menu_screen_button_event(rpg_t *game);
 void menu_scren_button(rpg_t *game);
 
 
 void handle_button_event_s(button_t *btn, rpg_t *game);
 void draw_all_button_s(rpg_t *game);
+void menu_s_button_event(rpg_t *game);
+void main_menu_sound_managment(rpg_t *game);
 void menu_s(rpg_t *game);
 
 
@@ -155,6 +154,7 @@ void draw_button(button_t *btn, sfRenderWindow *window);
 button_t *create_button(sfTexture *texture, sfVector2f pos, sfVector2f scale);
 void update_button(button_t *btn, sfRenderWindow *window);
 void destroy_all_button(rpg_t *game);
+void init_button(rpg_t *game);
 
 
 void load_frames(rpg_t *game);

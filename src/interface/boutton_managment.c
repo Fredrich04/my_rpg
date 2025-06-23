@@ -28,7 +28,6 @@ button_t *create_button(sfTexture *texture, sfVector2f pos, sfVector2f scale)
     btn->elapsed = 0.0f;
     btn->state = NORMAL;
     btn->bounds = (sfFloatRect){0};
-    //sfTexture_destroy(texture);
     return btn;
 }
 

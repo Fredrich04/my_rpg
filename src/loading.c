@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2025
+** loading
+** File description:
+** loading
+*/
+
 #include "../include/rpg.h"
 
 static float frame_duration;
@@ -11,13 +18,13 @@ void load_frames(rpg_t *game)
     game->loading = malloc(sizeof(loading_t));
     game->loading->clock = sfClock_create();
     for (int i = 0; i < LOADING_FRAME; i++) {
+        game->loading->txt[i] = NULL;
+        game->loading->sprite[i] = NULL;
+    }
+    for (int i = 0; i < LOADING_FRAME; i++) {
         sprintf(filename, "assert/loading/%d.png", i + 1);
         game->loading->txt[i] = sfTexture_createFromFile(filename, NULL);
-        if (!game->loading->txt[i])
-            continue;
         game->loading->sprite[i] = sfSprite_create();
-        if (!game->loading->sprite[i])
-            continue;
         sfSprite_setTexture(game->loading->sprite[i], game->loading->txt[i],
             sfTrue);
     }
@@ -64,10 +71,22 @@ void loading(rpg_t *game)
 
 void destroy_loading(rpg_t *game)
 {
+    if (!game || !game->loading)
+        return;
     for (int i = 0; i < LOADING_FRAME; i++) {
-        sfTexture_destroy(game->loading->txt[i]);
-        sfSprite_destroy(game->loading->sprite[i]);
+        if (game->loading->sprite[i]) {
+            sfSprite_destroy(game->loading->sprite[i]);
+            game->loading->sprite[i] = NULL;
+        }
+        if (game->loading->txt[i]) {
+            sfTexture_destroy(game->loading->txt[i]);
+            game->loading->txt[i] = NULL;
+        }
     }
-    game->loading->clock;
+    if (game->loading->clock) {
+        sfClock_destroy(game->loading->clock);
+        game->loading->clock = NULL;
+    }
     free(game->loading);
+    game->loading = NULL;
 }

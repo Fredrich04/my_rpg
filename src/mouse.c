@@ -7,7 +7,7 @@
 
 #include "../include/rpg.h"
 
-void sfMouse_getPositionResized(rpg_t *game)
+void sfmouse_get_position_resized(rpg_t *game)
 {
     game->mouse_pos = sfMouse_getPositionRenderWindow(game->window);
     game->mouse_pos.x *= game->new_scale.x;

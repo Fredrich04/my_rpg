@@ -78,22 +78,22 @@ void menu_credit_button_press_event(rpg_t *game)
 
 void menu_credit_button_event(rpg_t *game)
 {
-    sfMouse_getPositionResized(game);
+    sfmouse_get_position_resized(game);
     handle_button_event_credit(game->btn->btn_back_credit, game);
-     if (game->event.type == sfEvtMouseButtonPressed) {
-            sfSound_play(game->music->sound_btn);
-            menu_credit_button_press_event(game);
-        }
-      if (game->event.type == sfEvtMouseButtonReleased) {
-          if (game->hovered = 0)
-          if (game->mouse_pos.x >= 76 && game->mouse_pos.x <= 410 && game->mouse_pos.y >= 116 && game->mouse_pos.y <= 452) {
-              game->hovered = 1;
-              printf("entered\n");
-              //sfRenderWindow_drawSprite(game->window, game->sprite_amy, NULL);
-          } else
-              game->hovered = 0;
-      }
-      printf("x= %d\n y= %d\n", game->mouse_pos.x, game->mouse_pos.y);
+    if (game->event.type == sfEvtMouseButtonPressed) {
+        sfSound_play(game->music->sound_btn);
+        menu_credit_button_press_event(game);
+    }
+    if (game->event.type == sfEvtMouseButtonReleased) {
+        if (game->hovered = 0)
+            if (game->mouse_pos.x >= 76 && game->mouse_pos.x <= 410 && game->mouse_pos.y >= 116 && game->mouse_pos.y <= 452) {
+                game->hovered = 1;
+                printf("entered\n");
+                //sfRenderWindow_drawSprite(game->window, game->sprite_amy, NULL);
+            } else
+                game->hovered = 0;
+    }
+    printf("x= %d\n y= %d\n", game->mouse_pos.x, game->mouse_pos.y);
 }
 
 void menu_credit_event(rpg_t *game)
