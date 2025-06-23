@@ -12,7 +12,6 @@ int main(void)
     rpg_t *game = malloc(sizeof(rpg_t));
 
     game_initialization(game);
-    game_loop(game);
-    destroy_game(game);
+    main_menu(game);
     return 0;
 }

@@ -7,16 +7,19 @@
 
 #include "../include/rpg.h"
 
-void close_event(rpg_t *game)
+void set_close(rpg_t *game)
 {
-    if (game->event.type == sfEvtClosed
-        || game->event.key.code == sfKeyEscape)
-        sfRenderWindow_close(game->window);
+    if (game->main_menu->is_close)
+        game->is_close = 1;
 }
 
-void game_event(rpg_t *game)
+void close_event(rpg_t *game)
 {
-    while (sfRenderWindow_pollEvent(game->window, &game->event)) {
-        close_event(game);
+    set_close(game);
+    if (game->event.type == sfEvtClosed
+        || game->event.key.code == sfKeyEscape || game->is_close) {
+        sfRenderWindow_close(game->window);
+        destroy_game(game);
+        exit(0);
     }
 }
