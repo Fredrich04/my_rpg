@@ -10,7 +10,7 @@
 void draw_ui(rpg_t *game, character_t *character,
     ennemies_t *ennemies)
 {
-    draw_character_ui(game, character);
-    draw_ennemies_ui(game, ennemies);
+//    draw_character_ui(game, character);
+  //  draw_ennemies_ui(game, ennemies);
     return;
 }
