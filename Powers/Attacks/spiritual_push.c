@@ -1,6 +1,6 @@
 #include "../weapons.h"
 
-powers_t blade_of_darkness(void)
+powers_t *spiritual_push(void)
 {
     powers_t *power = malloc(sizeof(powers_t));
 
@@ -10,4 +10,5 @@ powers_t blade_of_darkness(void)
     power->level = "";
     power->required_manas = 50;
     power->side_effects = 0;
+    return power;
 }

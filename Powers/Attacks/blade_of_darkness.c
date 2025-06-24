@@ -1,6 +1,6 @@
 #include "../weapons.h"
 
-powers_t blade_of_darkness(void)
+powers_t *blade_of_darkness(void)
 {
     powers_t *power = malloc(sizeof(powers_t));
 

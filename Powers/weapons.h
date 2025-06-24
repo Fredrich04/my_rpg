@@ -60,4 +60,14 @@ typedef struct powers {
 } powers_t;
 
 powers_t *ultimate_judgement(void);
+powers_t *hunting_hand(void);
+powers_t *field_of_exorcist(void);
+powers_t *mana_transfusion(void);
+powers_t *blade_of_darkness(void);
+powers_t *blood_shout(void);
+powers_t *spiritual_push(void);
+powers_t *voil_ancien(void);
+powers_t *suzano_shield(void);
+powers_t *untouchable(void);
+powers_t *wandering_spirits(void);
 #endif

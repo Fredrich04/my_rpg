@@ -17,6 +17,16 @@ POWERS	=	Powers/*.c
 
 EXORCISM	=	Powers/Exorcism/*.c
 
+ATT	=	Powers/Attacks/*.c
+
+DEF	=	Powers/Defense/*.c
+
+INV	=	Powers/Invocation/*.c
+
+BLEE	=	Powers/Bleeding_rituals/*.c
+
+ALL_TYPES	=	$(ATT) $(DEF) $(INV) $(BLEE) $(EXORCISM)
+
 NAME	=	my_rpg
 
 CSFML_FLAG	=	-lcsfml-graphics -lcsfml-window -lcsfml-audio -lcsfml-system
@@ -25,9 +35,9 @@ MATH_FLAG	=	-lm
 
 DEBUG_FLAG	=	-g3
 
-ALL_POWERS	=	$(EXORCISM) $(POWERS) $(DECOR)
+ALL_POWERS	=	$(POWERS) $(DECOR)
 
-SRC	=	$(SRC1) $(SRC2) $(ALL_POWERS)
+SRC	=	$(SRC1) $(SRC2) $(ALL_POWERS) $(ALL_TYPES)
 
 all:
 	gcc -o $(NAME) $(SRC) $(CSFML_FLAG) $(MATH_FLAG) $(DEBUG_FLAG)

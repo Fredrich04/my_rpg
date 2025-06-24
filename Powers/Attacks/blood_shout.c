@@ -1,6 +1,6 @@
 #include "../weapons.h"
 
-powers_t blood_shout(void)
+powers_t *blood_shout(void)
 {
     powers_t *power = malloc(sizeof(powers_t));
 

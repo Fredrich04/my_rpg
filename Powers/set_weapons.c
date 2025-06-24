@@ -60,8 +60,8 @@ powers_t *add_weapon(powers_t **head, powers_t *to_add)
         (*head)->prev = new;
         *head = new;
     }
-    free(to_add->name);
-    free(to_add->comment);
+   // free(to_add->name);
+    //free(to_add->comment);
     free(to_add);
     return *head;
 }
@@ -70,5 +70,15 @@ powers_t *load_weapons_in_list(powers_t *weapons)
 {
     weapons = NULL;
     add_weapon(&weapons, ultimate_judgement());
+    add_weapon(&weapons, field_of_exorcist());
+    add_weapon(&weapons, hunting_hand());
+    add_weapon(&weapons, spiritual_push());
+    add_weapon(&weapons, blade_of_darkness());
+    add_weapon(&weapons, blood_shout());
+    add_weapon(&weapons, wandering_spirits());
+    add_weapon(&weapons, mana_transfusion());
+    add_weapon(&weapons, suzano_shield());
+    add_weapon(&weapons, untouchable());
+    add_weapon(&weapons, voil_ancien());
     return weapons;
 }
