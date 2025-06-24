@@ -40,7 +40,7 @@ void draw_ennemies_ui(rpg_t *game, ennemies_t *ennemies);
 powers_t *load_weapons_in_list(powers_t *weapons);
 
 void game_event(rpg_t *game);
-
+float manage_time(sfClock *clock);
 void game_initialization(rpg_t *game);
 void destroy_game(rpg_t *game);
 void game_loop(rpg_t *game);
