@@ -8,7 +8,7 @@ void my_envelement(sfVector2f size, sfRenderWindow *wind, sfVector2f position)
     sfRectangleShape_setOutlineThickness(arriere_plan, 10);
     sfRectangleShape_setPosition(arriere_plan, position);
     sfRectangleShape_setSize(arriere_plan,(sfVector2f){(float)size.x, (float)size.y});
-    sfRenderWindow_drawRectangleShape(wind, arriere_plan, NULL);
+   // sfRenderWindow_drawRectangleShape(wind, arriere_plan, NULL);
 }
 
 void my_environnement(char *filename, sfRenderWindow *wind)
@@ -23,7 +23,7 @@ void my_environnement(char *filename, sfRenderWindow *wind)
    // sfRenderWindow_setView(wind, view);
     sfRectangleShape_setSize(arriere_plan,(sfVector2f){(float)size.x, (float)size.y});
     sfRectangleShape_setTexture(arriere_plan, fond, sfTrue);
-    sfRenderWindow_drawRectangleShape(wind, arriere_plan, NULL);
+    //sfRenderWindow_drawRectangleShape(wind, arriere_plan, NULL);
     sfRectangleShape_destroy(arriere_plan);
     sfTexture_destroy(fond);
 }
