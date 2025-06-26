@@ -5,7 +5,7 @@
 ** button
 */
 
-#include "../include/rpg.h"
+#include "../../include/rpg.h"
 
 static void init_screen_button(rpg_t *game)
 {
