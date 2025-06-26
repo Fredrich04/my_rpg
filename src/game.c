@@ -13,12 +13,9 @@ void game_initialization(rpg_t *game)
     load_intro_frames(game);
 }
 
-void game_loop(rpg_t *game)
-{
-    play_intro(game);
-}
-
 void destroy_game(rpg_t *game)
 {
+    destroy_intro(game);
     sfRenderWindow_destroy(game->window);
+    free(game);
 }

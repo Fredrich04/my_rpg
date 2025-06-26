@@ -15,6 +15,8 @@
     #include <stdio.h>
     #include <stdint.h>
     #include <stdbool.h>
+    #include <unistd.h>
+    #include <limits.h>
     #include <SFML/Graphics.h>
     #include <SFML/Audio.h>
     #include <SFML/System.h>
@@ -23,16 +25,13 @@
     #include <time.h>
 
     #define GAME_NAME "Cursed Legacy"
-    #define INTRO_FRAME 52
+    #define INTRO_FRAME 112
 
 typedef struct intro {
-    sfSprite *sprite[INTRO_FRAME];
-    sfTexture *txt[INTRO_FRAME];
-    sfClock *clock, *man_clock, *play_clock;
-    float time, man_time, play_time, play_duration;
-    sfSprite *tambour, *man, *playing;
-    sfTexture *tambour_txt, *man_txt, *playing_txt;
-    sfIntRect walk, play;
+    sfSprite **sprite;
+    sfTexture **txt;
+    sfClock *clock;
+    float time;
 } intro_t;
 
 typedef struct rpg {

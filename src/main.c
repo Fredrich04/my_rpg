@@ -12,7 +12,7 @@ int main(void)
     rpg_t *game = malloc(sizeof(rpg_t));
 
     game_initialization(game);
-    game_loop(game);
+    play_intro(game);
     destroy_game(game);
     return 0;
 }
