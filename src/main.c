@@ -20,7 +20,7 @@ int main(void)
         test = test->next;
     }
    // printf("The current loading weapon is %s\n", game->powers->comment);
-    game_loop(game);
+    //game_loop(game);
     destroy_game(game);
     return 0;
 }

@@ -15,20 +15,26 @@ void game_initialization(rpg_t *game)
 
 void game_loop(rpg_t *game)
 {
-    sfSprite *test = sfSprite_create();
-    sfTexture *test1 = sfTexture_createFromFile("./Powers/global_images/fight_decor.jpeg", NULL);
-    ennemies_t *ennemies = create_ennemie_ui();
-    character_t *character = create_main_character_ui(game->powers);
+    sfVector2f mc_position;
+    sfVector2f ennemy_position;
+    sfVector2f ennemy_scale;
+    sfVector2f mc_scale;
+    sfSprite *decor_sprite = sfSprite_create();
+    sfSprite *mc_sprite = sfSprite_create();
+    sfSprite *ennemy_sprite = sfSprite_create();
+    sfTexture *decor_texture = sfTexture_createFromFile("", NULL);
+    sfTexture *mc_texture = sfTexture_createFromFile("", NULL);
+    sfTexture *ennemy_texture = sfTexture_createFromFile("", NULL);
 
-    sfSprite_setTexture(test, test1, sfTrue);
-    game->powers->texture_size = sfTexture_getSize(test1);
-    game->powers->scale = (sfVector2f){(double)1920 / game->powers->texture_size.x, (double)1080 / game->powers->texture_size.y};
-    sfSprite_setScale(test, game->powers->scale);
+    sfSprite_setTexture(decor_sprite, decor_texture, sfTrue);
+    sfSprite_setTexture(mc_sprite, mc_texture, sfTrue);
+    sfSprite_setTexture(ennemy_sprite, ennemy_texture, sfTrue);
     while (sfRenderWindow_isOpen(game->window)) {
         game_event(game);
         sfRenderWindow_clear(game->window, sfBlack);
-        sfRenderWindow_drawSprite(game->window, test, NULL);
-        draw_ui(game, character, ennemies);
+        sfRenderWindow_drawSprite(game->window, decor_sprite, NULL);
+        sfRenderWindow_drawSprite(game->window, mc_sprite, NULL);
+        sfRenderWindow_drawSprite(game->window, ennemy_sprite, NULL);
         sfRenderWindow_display(game->window);
     }
 }
