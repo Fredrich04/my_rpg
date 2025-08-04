@@ -29,14 +29,19 @@ typedef struct rpg {
     sfRenderWindow *window;
     sfEvent event;
     powers_t *powers;
+    character_t *character;
+    ennemies_t *ennemies;
 } rpg_t;
 
+void spawn_mc_for_fighting(sfTexture *mc_texture, sfSprite *mc_sprite);
+void spawn_ennemy_for_fight(sfTexture *ennemy_texture, sfSprite *ennemy_sprite);
+void spawn_decor(sfSprite *decor_sprite, sfTexture *decor_texture);
+void destroy_ennemy_and_mc(sfTexture *mc_t, sfTexture *emy_t, sfSprite *mc_s, sfSprite *emy_s);
+void destroy_decor(sfTexture *decor_texture, sfSprite *decor_sprite);
+void draw_mc_ui_infos(rpg_t *game);
+void draw_ennemy_ui_infos(rpg_t *game);
 character_t *create_main_character_ui(powers_t *powers);
 ennemies_t *create_ennemie_ui(void);
-void draw_ui(rpg_t *game, character_t *character,
-    ennemies_t *ennemies);
-void draw_character_ui(rpg_t *game, character_t *character);
-void draw_ennemies_ui(rpg_t *game, ennemies_t *ennemies);
 powers_t *load_weapons_in_list(powers_t *weapons);
 
 void game_event(rpg_t *game);
