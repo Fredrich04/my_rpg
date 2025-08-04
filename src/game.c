@@ -37,24 +37,24 @@ void game_loop(rpg_t *game)
     sfSprite_setTexture(mc_sprite, mc_texture, sfTrue);
     sfSprite_setTexture(ennemy_sprite, ennemy_texture, sfTrue);
     sfSprite_setTextureRect(mc_sprite, (sfIntRect) {0, 0, mc_sprite_size.x / 3, mc_sprite_size.y});
-    sfSprite_setTextureRect(ennemy_sprite, (sfIntRect) {ennemy_sprite_size.x / 4, ennemy_sprite_size.y / 2, ennemy_sprite_size.x / 4, ennemy_sprite_size.y / 2});
+    sfSprite_setTextureRect(ennemy_sprite, (sfIntRect) {0, ennemy_sprite_size.y / 2, ennemy_sprite_size.x / 3.5, ennemy_sprite_size.y / 2});
     printf("The scale I am currently using is %.2f, %.2f\n", (double) 1920 / (mc_sprite_size.x / 3), (double) 1080 / (mc_sprite_size.y));
     mc_scale = (sfVector2f) {(double)  (mc_sprite_size.x / 3) / 200, (double) (mc_sprite_size.y) / 350};
     mc_position = (sfVector2f) {0, 900 - (double) (mc_sprite_size.y) * (mc_sprite_size.y) / 350};
-    ennemy_scale = (sfVector2f) {(double)  (ennemy_sprite_size.x / 4) / 100, 500 / (ennemy_sprite_size.y / 2)};
-    ennemy_position = (sfVector2f) {0, 900 - (ennemy_sprite_size.y * (ennemy_sprite_size.y / 2) / 350)};
+    ennemy_scale = (sfVector2f) {(double)  (1), (double) 1.5};
+    ennemy_position = (sfVector2f) {1800 - ennemy_sprite_size.x / 3.5, 950 - (1.5 * (ennemy_sprite_size.y / 2))};
     decor_scale = (sfVector2f) {(double) 1920 / decor_sprite_size.x, (double) 1080 / decor_sprite_size.y};
     sfSprite_setPosition(mc_sprite, mc_position);
     sfSprite_setScale(mc_sprite, mc_scale);
-    sfSprite_setScale(ennemy_sprite, ennemy_scale);
-    //sfSprite_setPosition(ennemy_sprite, ennemy_position);
+    sfSprite_setScale(ennemy_sprite, ennemy_scale);   
+    sfSprite_setPosition(ennemy_sprite, ennemy_position);
     sfSprite_setScale(decor_sprite, decor_scale);
     while (sfRenderWindow_isOpen(game->window)) {
         game_event(game);
         sfRenderWindow_clear(game->window, sfBlack);
-        //sfRenderWindow_drawSprite(game->window, decor_sprite, NULL);
-        //sfRenderWindow_drawSprite(game->window, mc_sprite, NULL);
-        sfRenderWindow_drawSprite(game->window, ennemy_sprite, NULL);
+        sfRenderWindow_drawSprite(game->window, decor_sprite, NULL);
+        sfRenderWindow_drawSprite(game->window, mc_sprite, NULL);
+       sfRenderWindow_drawSprite(game->window, ennemy_sprite, NULL);
         sfRenderWindow_display(game->window);
     }
 }
