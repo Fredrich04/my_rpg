@@ -30,14 +30,23 @@ typedef struct character {
   int manas;
   int exp;
   char **all_ranks;
+  char *name;
   sfRectangleShape *pv_mc;
-  sfRectangleShape *pv_emy;
+  sfText *pv_text;
+  sfText *level_text;
+  sfText *name_text;
+  sfFont *font;
 } character_t;
 
 typedef struct ennemies {
   char *rank;
   int level;
   int pv;
+  sfRectangleShape *pv_emy;
+  sfText *pv_text;
+  sfText *level_text;
+  sfText *name_text;
+  sfFont *font;
 } ennemies_t;
 
 #endif

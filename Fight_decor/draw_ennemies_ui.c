@@ -1,5 +1,10 @@
 #include "../include/rpg.h"
 
+void create_related_to_ennemies_texts(rpg_t *game)
+{
+
+}
+
 void draw_ennemy_ui_infos(rpg_t *game)
 {
     sfRectangleShape *emy_pv = sfRectangleShape_create();
@@ -8,7 +13,7 @@ void draw_ennemy_ui_infos(rpg_t *game)
     sfRectangleShape_setOutlineColor(emy_pv, sfWhite);
     sfRectangleShape_setOutlineThickness(emy_pv, 2.0);
     sfRectangleShape_setFillColor(emy_pv, sfBlack);
-    game->character->pv_emy = emy_pv;
+    game->ennemies->pv_emy = emy_pv;
 }
 
 void spawn_ennemy_for_fight(sfTexture *ennemy_texture, sfSprite *ennemy_sprite)

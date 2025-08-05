@@ -12,7 +12,7 @@ character_t *create_main_character_ui(powers_t *powers)
 
     characters->exp = 0;
     characters->level = 1;
-    characters->all_ranks = malloc(sizeof(char *) * 8);
+    characters->all_ranks = malloc(sizeof(char *) * 9);
     characters->all_ranks[0] = strdup("Profane");
     characters->all_ranks[1] = strdup("Initié");
     characters->all_ranks[2] = strdup("Exorciste errant");
@@ -24,6 +24,7 @@ character_t *create_main_character_ui(powers_t *powers)
     characters->all_ranks[8] = NULL;
     characters->rank = characters->all_ranks[0];
     characters->manas = 0;
+    characters->name = strdup("Kevin debruyne");
     characters->pv = 100;
     characters->powers = powers;
     return characters;
