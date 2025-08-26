@@ -1,8 +1,65 @@
 #include "../include/rpg.h"
 
+
+
+static void set_mc_texts_features(rpg_t *game)
+{
+    sfVector2f pv_rectangle_pos = sfRectangleShape_getPosition(game->ennemies->pv_emy);
+    sfVector2f pv_text_position = pv_rectangle_pos;
+    sfVector2f level_text_position = {pv_text_position.x, pv_text_position.y + 25};
+    sfVector2f rank_text_position = {pv_text_position.x, pv_text_position.y + 50};
+
+    sfText_setPosition(game->ennemies->pv_text, pv_text_position);
+    sfText_setFillColor(game->ennemies->pv_text, sfGreen);
+    sfText_setOutlineThickness(game->ennemies->pv_text, 2.0);
+    sfText_setOutlineColor(game->ennemies->pv_text, sfWhite);
+    sfText_setCharacterSize(game->ennemies->pv_text, 20);
+
+    sfText_setPosition(game->ennemies->level_text, level_text_position);
+    sfText_setFillColor(game->ennemies->level_text, sfGreen);
+    sfText_setOutlineThickness(game->ennemies->level_text, 2.0);
+    sfText_setOutlineColor(game->ennemies->level_text, sfWhite);
+    sfText_setCharacterSize(game->ennemies->level_text, 20);
+
+    sfText_setPosition(game->ennemies->rank_text, rank_text_position);
+    sfText_setFillColor(game->ennemies->rank_text, sfGreen);
+    sfText_setOutlineThickness(game->ennemies->rank_text, 2.0);
+    sfText_setOutlineColor(game->ennemies->rank_text, sfWhite);
+    sfText_setCharacterSize(game->ennemies->rank_text, 20);
+}
+
+static void display_newly_filled(rpg_t *game)
+{
+    sfRenderWindow_drawText(game->window, game->ennemies->pv_text, NULL);
+    sfRenderWindow_drawText(game->window, game->ennemies->level_text, NULL);
+    sfRenderWindow_drawText(game->window, game->ennemies->rank_text, NULL);
+}
+
+void updated_filling_ennemy_texts(rpg_t *game)
+{
+    char *temp = malloc(sizeof(char) * 10000);
+    sfText_setString(game->ennemies->rank_text, game->ennemies->rank);
+    sprintf(temp, "%d", game->ennemies->pv);
+    sfText_setString(game->ennemies->pv_text, temp);
+    sprintf(temp, "%d", game->ennemies->level);
+    sfText_setString(game->ennemies->level_text, temp);
+    free(temp);
+    set_mc_texts_features(game);
+    display_newly_filled(game);
+}
+
+
 void create_related_to_ennemies_texts(rpg_t *game)
 {
+    game->ennemies->font = sfFont_createFromFile("./Fight_decor/Namaku.ttf");
+    game->ennemies->level_text = sfText_create();
+    game->ennemies->rank_text = sfText_create();
+    game->ennemies->pv_text = sfText_create();
 
+    printf("\n\n\n\nLet us all realize that the name of the title of the ennemy is %s\n\n", game->ennemies->rank);
+    sfText_setFont(game->ennemies->level_text, game->ennemies->font);
+    sfText_setFont(game->ennemies->rank_text, game->ennemies->font);
+    sfText_setFont(game->ennemies->pv_text, game->ennemies->font);
 }
 
 void draw_ennemy_ui_infos(rpg_t *game)

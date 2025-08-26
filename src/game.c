@@ -23,19 +23,15 @@ void game_loop(rpg_t *game)
     sfTexture *ennemy_texture = sfTexture_createFromFile("./src/ennemy.png", NULL);
     
     game->character = create_main_character_ui(game->powers);
-    game->ennemies = create_ennemie_ui();
-    printf("The current number of pv of the mc is %d\n", game->character->pv);
-
+    game->ennemies = create_ennemie_ui();    
     spawn_decor(decor_sprite, decor_texture);
     spawn_ennemy_for_fight(ennemy_texture, ennemy_sprite);
     spawn_mc_for_fighting(mc_texture, mc_sprite);
-    //printf("Am i allowed to overtake the segmentation fault\n");
     draw_mc_ui_infos(game);
     draw_ennemy_ui_infos(game);
-//    printf("Am i allowed to overtake the segmentation fault\n");
-        create_related_to_mc_texts(game);
+    create_related_to_mc_texts(game);
+    create_related_to_ennemies_texts(game);
     while (sfRenderWindow_isOpen(game->window)) {
-        //printf("Do i even get the chance to znter in this loop?\n");
         game_event(game);
         sfRenderWindow_clear(game->window, sfBlack);
         sfRenderWindow_drawSprite(game->window, decor_sprite, NULL);
@@ -44,6 +40,7 @@ void game_loop(rpg_t *game)
         sfRenderWindow_drawRectangleShape(game->window, game->character->pv_mc, NULL);
         sfRenderWindow_drawRectangleShape(game->window, game->ennemies->pv_emy, NULL);
         updated_filling_mc_texts(game);
+        updated_filling_ennemy_texts(game);
         sfRenderWindow_display(game->window);
     }
     sfRectangleShape_destroy(game->character->pv_mc);

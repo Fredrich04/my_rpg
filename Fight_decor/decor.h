@@ -46,6 +46,7 @@ typedef struct ennemies {
   sfText *pv_text;
   sfText *level_text;
   sfText *name_text;
+  sfText *rank_text;
   sfFont *font;
 } ennemies_t;
 

@@ -39,7 +39,9 @@ void spawn_decor(sfSprite *decor_sprite, sfTexture *decor_texture);
 void destroy_ennemy_and_mc(sfTexture *mc_t, sfTexture *emy_t, sfSprite *mc_s, sfSprite *emy_s);
 void destroy_decor(sfTexture *decor_texture, sfSprite *decor_sprite);
 void create_related_to_mc_texts(rpg_t *game);
+void create_related_to_ennemies_texts(rpg_t *game);
 void updated_filling_mc_texts(rpg_t *game);
+void updated_filling_ennemy_texts(rpg_t *game);
 
 void draw_mc_ui_infos(rpg_t *game);
 void draw_ennemy_ui_infos(rpg_t *game);

@@ -7,38 +7,47 @@
 
 #include "../include/rpg.h"
 
-void set_mc_texts_features(rpg_t *game)
+static void set_mc_texts_features(rpg_t *game)
 {
     sfVector2f pv_rectangle_pos = sfRectangleShape_getPosition(game->character->pv_mc);
     sfVector2f pv_text_position = pv_rectangle_pos;
-    sfVector2f level_text_position;
-    sfVector2f name_text_position;
+    sfVector2f level_text_position = {pv_text_position.x, pv_text_position.y + 25};
+    sfVector2f name_text_position = {pv_text_position.x, pv_text_position.y + 50};
 
     sfText_setPosition(game->character->pv_text, pv_text_position);
     sfText_setFillColor(game->character->pv_text, sfGreen);
     sfText_setOutlineThickness(game->character->pv_text, 2.0);
-    sfText_setOutlineColor(game->character->pv_text, sfGreen);
+    sfText_setOutlineColor(game->character->pv_text, sfWhite);
     sfText_setCharacterSize(game->character->pv_text, 20);
+
+    sfText_setPosition(game->character->level_text, level_text_position);
+    sfText_setFillColor(game->character->level_text, sfGreen);
+    sfText_setOutlineThickness(game->character->level_text, 2.0);
+    sfText_setOutlineColor(game->character->level_text, sfWhite);
+    sfText_setCharacterSize(game->character->level_text, 20);
+
+    sfText_setPosition(game->character->name_text, name_text_position);
+    sfText_setFillColor(game->character->name_text, sfGreen);
+    sfText_setOutlineThickness(game->character->name_text, 2.0);
+    sfText_setOutlineColor(game->character->name_text, sfWhite);
+    sfText_setCharacterSize(game->character->name_text, 20);
 }
 
-void display_newly_filled(rpg_t *game)
+static void display_newly_filled(rpg_t *game)
 {
     sfRenderWindow_drawText(game->window, game->character->pv_text, NULL);
+    sfRenderWindow_drawText(game->window, game->character->level_text, NULL);
+    sfRenderWindow_drawText(game->window, game->character->name_text, NULL);
 }
 
 void updated_filling_mc_texts(rpg_t *game)
 {
-//    printf("An example of value is %s\n", game->character->name);
     char *temp = malloc(sizeof(char) * 10000);
     sfText_setString(game->character->name_text, game->character->name);
-  //  printf("An example of value is %s\n", game->character->name);
     sprintf(temp, "%d", game->character->pv);
     sfText_setString(game->character->pv_text, temp);
-//    printf("An example of value is %s\n", game->character->name);
     sprintf(temp, "%d", game->character->level);
-    //printf("An example of value is %s\n", game->character->name);
     sfText_setString(game->character->level_text, temp);
-    //printf("An example of value is %s\n", game->character->name);
     free(temp);
     set_mc_texts_features(game);
     display_newly_filled(game);
@@ -59,8 +68,8 @@ void create_related_to_mc_texts(rpg_t *game)
 void draw_mc_ui_infos(rpg_t *game)
 {
     sfRectangleShape *mc_pv = sfRectangleShape_create();
-    sfRectangleShape_setPosition(mc_pv, (sfVector2f) {10, 1080 - 150});
-    sfRectangleShape_setSize(mc_pv, (sfVector2f) {200, 50});
+    sfRectangleShape_setPosition(mc_pv, (sfVector2f) {10, 0});//1080 - 150});
+    sfRectangleShape_setSize(mc_pv, (sfVector2f) {200, 150});
     sfRectangleShape_setOutlineColor(mc_pv, sfWhite);
     sfRectangleShape_setOutlineThickness(mc_pv, 2.0);
     sfRectangleShape_setFillColor(mc_pv, sfBlack);
